@@ -11,7 +11,7 @@
         
 
         $dbConnect = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        if($dbConnect) {
-            echo "Connected";
-        }
+        // if($dbConnect) {
+        //     echo "Connected";
+        // }
 ?>
