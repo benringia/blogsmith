@@ -1,4 +1,6 @@
+<?php ob_start(); ?> <!--output bufferring-->
 <?php include "../includes/db.php"?>
+
 
 <!DOCTYPE html>
 <html lang="en">
