@@ -29,12 +29,12 @@
                         } else {
                           
 
-                    while($row = mysqli_fetch_assoc($searchQuery)) {
-                       $postTitle =  $row['post_title'];
-                       $postAuthor =  $row['post_author'];
-                       $postDate =  $row['post_date'];
-                       $postImage =  $row['post_image'];
-                       $postContent =  $row['post_content'];
+                        while($row = mysqli_fetch_assoc($searchQuery)) {
+                            $postTitle =  $row['post_title'];
+                            $postAuthor =  $row['post_author'];
+                            $postDate =  $row['post_date'];
+                            $postImage =  $row['post_image'];
+                            $postContent =  $row['post_content'];
 
                        ?>
 
@@ -58,8 +58,8 @@
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php } 
-                        }
+                <?php } //end of while loop
+                        } //end of count else
         
                     }?>
 
