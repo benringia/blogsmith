@@ -1,7 +1,7 @@
 <?php 
     if(isset($_POST['create_post'])) {
        $postTitle = $_POST['title'];
-       $postAuthor = $_POST['author'];
+       $postAuthor = $_POST['post_author'];
        $postCategoryId = $_POST['post_category_id'];
        $postStatus = $_POST['post_status'];
 
@@ -17,7 +17,14 @@
       
         //move uploaded images to location
        move_uploaded_file($postImageTemp, "images/$postImage");
-      
+        
+       $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date,post_image,post_content,post_tags,post_comment_count,post_status) ";
+       $query .= "VALUES({$postCategoryId},'{$postTitle}','{$postAuthor}',now(),'{$postImage}','{$postContent}','{$postTags}','{$post_comment_count}','{$postStatus}') ";
+
+       $createPostQuery = mysqli_query($dbConnect, $query);
+
+       checkQuery($createPostQuery);
+     
     }
 ?>
 
@@ -56,7 +63,7 @@
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post-content" id="" cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"></textarea>
     </div>
 
  <div class="form-group">

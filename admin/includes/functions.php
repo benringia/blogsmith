@@ -1,5 +1,13 @@
 <?php 
 
+    function checkQuery($result) {
+        global $dbConnect;
+        if(!$result) {
+            die("Error : " . mysqli_error($dbConnect));
+           }
+    }
+
+    
     function insertCategory() {
         global $dbConnect;
         if(isset($_POST['submit'])) {
