@@ -32,9 +32,19 @@
             
             move_uploaded_file($post_image_temp, "images/$postImage");
 
+            if(empty($postImage)) {
+                $query = "SELECT * FROM posts WHERE post_id = $getId ";
+                $selectImage = mysqli_query($dbConnect, $query);
+
+                while($row = mysqli_fetch_array($selectImage)) {
+                    $post_image = $row['post_image'];
+                }
+            }
+
             $query = "UPDATE posts SET ";
             $query .="post_title = '{$postTitle}', ";
             $query .="post_category_id = '{$postCategoryId}', ";
+            $query .="post_date = now(), ";
             $query .="post_author = '{$postAuthor}', ";
             $query .="post_status = '{$postStatus}', ";
             $query .="post_tags = '{$postTags}', ";
@@ -42,7 +52,6 @@
             $query .="post_image = '{$postImage}' ";
             $query .="WHERE post_id = {$getId} ";
 
-            // $query = "UPDATE posts SET post_title = '{$post_title}', post_category_id = {$post_category_id}, post_date = now(), post_author = '{$post_author}', post_status= '{$post_status}', post_tags = '{$post_tags}', post_content = '{$post_content}', post_image = '{$post_image}' WHERE post_id = '{$getId}'";
             $update_post = mysqli_query($dbConnect,$query);
             checkQuery($update_post);
         }
