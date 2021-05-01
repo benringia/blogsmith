@@ -37,7 +37,7 @@
                 $selectImage = mysqli_query($dbConnect, $query);
 
                 while($row = mysqli_fetch_array($selectImage)) {
-                    $post_image = $row['post_image'];
+                    $postImage = $row['post_image'];
                 }
             }
 
@@ -95,6 +95,7 @@
     <div class="form-group">
         <label for="image">Post Image</label><br>
         <img width=100 src="images/<?php echo $postImage?>" alt="">
+        <input type="file" name="image">
     </div>
 
     <div class="form-group">
