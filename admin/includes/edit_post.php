@@ -4,7 +4,7 @@
         $getId = $_GET['p_id'];
 
     }
-       $query = "SELECT * FROM posts";
+       $query = "SELECT * FROM posts WHERE post_id = $getId ";
        $selectPostsById = mysqli_query($dbConnect,$query);
 
        while($row = mysqli_fetch_assoc($selectPostsById)) {
@@ -20,12 +20,39 @@
            $postContent= $row['post_content'];
        }
 
+        if(isset($_POST['update_post'])) {
+            $postAuthor = mysqli_real_escape_string($dbConnect,$_POST['post_author']);
+            $postTitle  = mysqli_real_escape_string($dbConnect,$_POST['post_title']);
+            $postCategoryId = $_POST['post_category'];
+            $postStatus = $_POST['post_status'];
+            $postImage = $_FILES['image']['name'];
+            $post_image_temp = $_FILES['image']['tmp_name'];
+            $postContent = mysqli_real_escape_string($dbConnect,$_POST['post_content']);
+            $postTags = $_POST['post_tags'];
+            
+            move_uploaded_file($post_image_temp, "images/$postImage");
+
+            $query = "UPDATE posts SET ";
+            $query .="post_title = '{$postTitle}', ";
+            $query .="post_category_id = '{$postCategoryId}', ";
+            $query .="post_author = '{$postAuthor}', ";
+            $query .="post_status = '{$postStatus}', ";
+            $query .="post_tags = '{$postTags}', ";
+            $query .="post_content = '{$postContent}', ";
+            $query .="post_image = '{$postImage}' ";
+            $query .="WHERE post_id = {$getId} ";
+
+            // $query = "UPDATE posts SET post_title = '{$post_title}', post_category_id = {$post_category_id}, post_date = now(), post_author = '{$post_author}', post_status= '{$post_status}', post_tags = '{$post_tags}', post_content = '{$post_content}', post_image = '{$post_image}' WHERE post_id = '{$getId}'";
+            $update_post = mysqli_query($dbConnect,$query);
+            checkQuery($update_post);
+        }
+
 ?>
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input value ="<?php echo $postTitle?>" type="text" class="form-control" name="title">
+        <input value ="<?php echo $postTitle?>" type="text" class="form-control" name="post_title">
     </div>
 
     <div class="form-group">
@@ -72,6 +99,6 @@
     </div>
 
  <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post">
+        <input class="btn btn-primary" type="submit" name="update_post" value="Update Post">
     </div>
 </form>
