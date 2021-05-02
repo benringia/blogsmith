@@ -6,6 +6,7 @@
             <th>Comments</th>
             <th>Email</th>
             <th>Status</th>
+            <th>In Response To</th>
             <th>Date</th>
             <th colspan="4" class="text-center">Actions</th>
         </tr>
@@ -40,6 +41,7 @@
 
             echo "<td>{$commentEmail}</td>";
             echo "<td>{$commentStatus}</td>";
+            echo "<td>Some Title</td>";
             echo "<td>{$commentDate}</td>";
             echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Approve</a></td>";
             echo "<td><a href='posts.php?delete={$postId}'>Deny</a></td>";

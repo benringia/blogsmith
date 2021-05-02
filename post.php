@@ -52,6 +52,39 @@
                 <hr>
                 <?php } ?>
 
+                <?php
+                    if(isset($_POST['create_comment'])) {
+                        $commentAuthor = $_POST['comment_author'];
+                        $commentEmail = $_POST['comment_email'];
+                        $commentContent = $_POST['comment_content'];
+                        
+
+                        // $postId = $_GET['p_id'];
+                        $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
+                        $query .= "VALUES ($postId, '$commentAuthor', '$commentEmail', '$commentContent', 'Denied', now()) ";
+                       
+                        $createCommentQuery = mysqli_query($dbConnect, $query);
+                    }
+                ?>
+                <!-- comments Form -->
+                        <div class="well">
+                            <h4>Leave a Comment:</h4>
+                            <form action="" method="post">
+
+                                <div class="form-group">
+                                    <label for="comment_author">Name</label>
+                                    <input type="text" class="form-control" name="comment_author" placeholder="Enter your Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment_email">Email</label>
+                                    <input type="email" class="form-control" name="comment_email" placeholder="Enter your Email">
+                                </div>
+                                <div class="form-group"><label for="comment_content">Your Comment: </label>
+                                    <textarea class="form-control" name="comment_content" id="" cols="30" rows="10"></textarea>
+                                </div>
+                                <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
