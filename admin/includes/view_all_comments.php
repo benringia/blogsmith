@@ -8,7 +8,7 @@
             <th>Status</th>
             <th>In Response To</th>
             <th>Date</th>
-            <th colspan="4" class="text-center">Actions</th>
+            <th colspan="3" class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -51,10 +51,9 @@
                 echo "<td><a href='../post.php?p_id=$postId'>$postTitle</a></td>";
             }
             echo "<td>{$commentDate}</td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Approve</a></td>";
-            echo "<td><a href='posts.php?delete={$postId}'>Deny</a></td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Edit</a></td>";
-            echo "<td><a href='posts.php?delete={$postId}'>Delete</a></td>";
+            echo "<td><a href='comments.php?approve={$commentId}'>Approve</a></td>";
+            echo "<td><a href='comments.php?deny={$commentId}'>Deny</a></td>";
+            echo "<td><a href='comments.php?delete={$commentId}'>Delete</a></td>";
             echo "</tr>";
         }
         
@@ -62,12 +61,32 @@
         ?>
 
         <?php 
-            if(isset($_GET['delete'])) {
-                $post_id = $_GET['delete'];
+            if(isset($_GET['approve'])) {
+                $commentId = $_GET['approve'];
 
-                $query = "DELETE FROM posts WHERE post_id = {$post_id} ";
-                $deleteQuery = mysqli_query($dbConnect, $query);
-                header("Location: posts.php");
+                $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = {$commentId} ";
+                $approveCommentQuery = mysqli_query($dbConnect, $query);
+                header("Location: comments.php");
+            }
+
+
+                //DENY COMMENT QUERY
+                if(isset($_GET['deny'])) {
+                    $commentId = $_GET['deny'];
+
+                    $query = "UPDATE comments SET comment_status = 'Denied' WHERE comment_id = {$commentId}";
+                    $denyCommentQuery = mysqli_query($dbConnect, $query);
+                    header("Location: comments.php");
+                }
+
+
+                //Delete comment query
+                if(isset($_GET['delete'])) {
+                    $commentId = $_GET['delete'];
+
+                    $query = "DELETE FROM comments WHERE comment_id = {$commentId} ";
+                    $deleteQuery = mysqli_query($dbConnect, $query);
+                    header("Location: comments.php");
                 }
         ?>
         
