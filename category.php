@@ -26,7 +26,7 @@
                        $postAuthor =  $row['post_author'];
                        $postDate =  $row['post_date'];
                        $postImage =  $row['post_image'];
-                       $postContent =  $row['post_content'];
+                       $postContent =  $postContent =  substr($row['post_content'],0,100); //for doing excerp
 
                        ?>
 
