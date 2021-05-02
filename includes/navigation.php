@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">BlogSmith</a>
+                <a class="navbar-brand" href="./index.php">BlogSmith</a>
             </div>
 
 
