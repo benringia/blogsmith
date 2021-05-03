@@ -76,11 +76,11 @@
 
                 //Change role QUERY
                 if(isset($_GET['subscriber'])) {
-                    $changeSubscriberQuery = $_GET['subscriber'];
+                    $changeSubsQuery = $_GET['subscriber'];
 
-                    $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = {$userId}";
+                    $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = {$userId} ";
                     $changeSubsQuery = mysqli_query($dbConnect, $query);
-                    header("Location: users.php");
+                    // header("Location: users.php");
                 }
 
 

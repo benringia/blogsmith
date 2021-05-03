@@ -1,36 +1,49 @@
 <?php 
     if(isset($_GET['edit_user'])) {
-         $userId = ['edit_user'];
+          $userId = $_GET['edit_user'];
 
+         $query = "SELECT * FROM users WHERE user_id = $userId ";
+         $selectUsersQuery = mysqli_query($dbConnect,$query);
+        
 
+         while($row = mysqli_fetch_assoc($selectUsersQuery)) {
+             $userId = $row['user_id'];
+            $userName = $row['username'];
+             $userPassword = $row['user_password'];
+             $userFirstname = $row['user_firstname'];
+             $userLastname = $row['user_lastname'];
+             $userEmail = $row['user_email'];
+             $userImage = $row['user_image'];
+             $userRole = $row['user_role'];
+         }
     }
-    if(isset($_POST['edit_user'])) {
-       $userId = $_POST['user_id'];
-        $userFirstname = $_POST['user_firstname'];
-       $userLastname = $_POST['user_lastname'];
-       $userRole = $_POST['user_role'];
+    // if(isset($_POST['edit_user'])) {
+    //    $userId = $_POST['user_id'];
+    //     $userFirstname = $_POST['user_firstname'];
+    //    $userLastname = $_POST['user_lastname'];
+    //    $userRole = $_POST['user_role'];
 
-    //    $postImage = $_FILES['image']['name'];
-    //    $postImageTemp = $_FILES['image']['tmp_name'];
+    // //    $postImage = $_FILES['image']['name'];
+    // //    $postImageTemp = $_FILES['image']['tmp_name'];
 
-       $userName = $_POST['username'];
-       $userEmail = $_POST['user_email'];
-       $userPassword = $_POST['user_password'];
-    //    $postDate = date('d-m-y');
+    //    $userName = $_POST['username'];
+    //    $userEmail = $_POST['user_email'];
+    //    $userPassword = $_POST['user_password'];
+    // //    $postDate = date('d-m-y');
 
 
       
-        //move uploaded images to location
-    //    move_uploaded_file($postImageTemp, "images/$postImage");
+    //     //move uploaded images to location
+    // //    move_uploaded_file($postImageTemp, "images/$postImage");
         
-       $query = "INSERT INTO users(user_firstname, user_lastname, user_role,username,user_email,user_password) ";
-       $query .= "VALUES('{$userFirstname}','{$userLastname}','{$userRole}','{$userName}','{$userEmail}','{$userPassword}') ";
+    //    $query = "INSERT INTO users(user_firstname, user_lastname, user_role,username,user_email,user_password) ";
+    //    $query .= "VALUES('{$userFirstname}','{$userLastname}','{$userRole}','{$userName}','{$userEmail}','{$userPassword}') ";
 
-       $createUserQuery = mysqli_query($dbConnect, $query);
+    //    $createUserQuery = mysqli_query($dbConnect, $query);
 
-       checkQuery($createUserQuery);
+    //    checkQuery($createUserQuery);
      
-    }
+    // }
 ?>
 
 
@@ -38,12 +51,12 @@
 
     <div class="form-group">
         <label for="user_firstname">First Name</label>
-        <input type="text" class="form-control" name="user_firstname">
+        <input type="text" value="<?php echo $userFirstname ?>" class="form-control" name="user_firstname">
     </div>
 
     <div class="form-group">
         <label for="user_lastname">Last Name</label>
-        <input type="text" class="form-control" name="user_lastname">
+        <input type="text" value="<?php echo $userLastname ?>" class="form-control" name="user_lastname">
     </div>
 
    
@@ -58,12 +71,12 @@
 
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" name="username">
+        <input type="text" value="<?php echo $userName ?>" class="form-control" name="username">
     </div>
 
     <div class="form-group">
         <label for="post_status">Email</label>
-        <input type="email" class="form-control" name="user_email">
+        <input type="email" value="<?php echo $userEmail ?>" class="form-control" name="user_email">
     </div>
 <!-- 
     <div class="form-group">
@@ -73,11 +86,11 @@
 
     <div class="form-group">
         <label for="user-password">Password</label>
-        <input type="password" class="form-control"  name="user_password">
+        <input type="password" value="<?php echo $userPassword ?>" class="form-control"  name="user_password">
     </div>
 
 
  <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="edit_user" value="Add User">
+        <input class="btn btn-primary" type="submit" name="edit_user" value="Edit User">
     </div>
 </form>
