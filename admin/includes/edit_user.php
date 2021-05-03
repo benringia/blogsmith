@@ -64,6 +64,27 @@
         <input value ="<?php echo $postTitle?>" type="text" class="form-control" name="post_title">
     </div>
 
+        <!-- COPIED FROM ADD USERS -->
+    <div class="form-group">
+        <label for="post_category_id">Role: </label><br>
+       <select class="form-select form-select-lg mb-3" name="user-role" id="">
+           <?php 
+             $query = "SELECT * FROM users ";
+             $selectUsers = mysqli_query($dbConnect, $query);
+             checkQuery($selectUsers);
+
+            while($row = mysqli_fetch_assoc($selectUsers)) {
+                $userId =  $row['user_id'];
+                $userRole =  $row['user_role'];
+                echo "<option value='$userId'>$userRole</option>";
+            } 
+                
+           ?>
+       </select>
+    </div>
+
+
+
     <div class="form-group">
         <label for="post_category_id">Post Category ID</label>
        <select name="post_category" id="">
