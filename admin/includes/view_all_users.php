@@ -8,7 +8,7 @@
             <th>Email</th>
             <th>Role</th>
             <!-- <th>Date</th> -->
-            <th colspan="3" class="text-center">Actions</th>
+            <th colspan="4" class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -54,8 +54,9 @@
             //     echo "<td><a href='../post.php?p_id=$postId'>$postTitle</a></td>";
             // }
             
-            echo "<td><a href='comments.php?approve={$commentId}'>Approve</a></td>";
-            echo "<td><a href='comments.php?deny={$commentId}'>Deny</a></td>";
+            echo "<td><a href='users.php?admin={$userId}'>Admin</a></td>";
+            echo "<td><a href='users.php?subscriber={$userId}'>Subscriber</a></td>";
+            echo "<td><a href='users.php?source=edit_user&edit_user={$userId}'>Edit</a></td>";
             echo "<td><a href='users.php?delete={$userId}'>Delete</a></td>";
             echo "</tr>";
         }
@@ -64,26 +65,26 @@
         ?>
 
         <?php 
-            if(isset($_GET['approve'])) {
-                $commentId = $_GET['approve'];
+            if(isset($_GET['admin'])) {
+                $userId = $_GET['admin'];
 
-                $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = {$commentId} ";
-                $approveCommentQuery = mysqli_query($dbConnect, $query);
-                header("Location: comments.php");
+                $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = {$userId} ";
+                $changeAdminQuery = mysqli_query($dbConnect, $query);
+                header("Location: users.php");
             }
 
 
-                //DENY COMMENT QUERY
-                if(isset($_GET['deny'])) {
-                    $commentId = $_GET['deny'];
+                //Change role QUERY
+                if(isset($_GET['subscriber'])) {
+                    $changeSubscriberQuery = $_GET['subscriber'];
 
-                    $query = "UPDATE comments SET comment_status = 'Denied' WHERE comment_id = {$commentId}";
-                    $denyCommentQuery = mysqli_query($dbConnect, $query);
-                    header("Location: comments.php");
+                    $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = {$userId}";
+                    $changeSubsQuery = mysqli_query($dbConnect, $query);
+                    header("Location: users.php");
                 }
 
 
-                //Delete comment query
+                //Delete query
                 if(isset($_GET['delete'])) {
                     $userId = $_GET['delete'];
 
