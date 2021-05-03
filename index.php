@@ -12,7 +12,7 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php 
-                    $query = "SELECT * FROM posts";
+                    $query = "SELECT * FROM posts ";
 
                     $allPostsQuery = mysqli_query($dbConnect, $query);
 
@@ -23,7 +23,13 @@
                        $postDate =  $row['post_date'];
                        $postImage =  $row['post_image'];
                        $postContent =  substr($row['post_content'],0,100); //for doing excerp
+                        $postStatus = $row['post_status'];
 
+                         if($postStatus !== 'PUBLISHED') {
+                            echo "<h1> No post found</h1>";
+                         } else {
+
+                         
                        ?>
 
                 <h1 class="page-header">
@@ -46,7 +52,7 @@
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php } ?>
+                <?php }  }?>
 
 
     

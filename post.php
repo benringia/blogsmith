@@ -64,6 +64,9 @@
                         $query .= "VALUES ($postId, '$commentAuthor', '$commentEmail', '$commentContent', 'Denied', now()) ";
                        
                         $createCommentQuery = mysqli_query($dbConnect, $query);
+
+                        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $postId ";
+                        $updateCommentCount = mysqli_query($dbConnect, $query);
                     }
                 ?>
                 <!-- comments Form -->
