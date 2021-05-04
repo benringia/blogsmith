@@ -1,4 +1,7 @@
+
 <?php 
+    
+
     if(isset($_GET['edit_user'])) {
           $userId = $_GET['edit_user'];
 
@@ -17,40 +20,40 @@
              $userRole = $row['user_role'];
          }
 
-       
-
     }
-    if(isset($_POST['edit_user'])) {
-        $userFirstname = $_POST['user_firstname'];
-       $userLastname = $_POST['user_lastname'];
-       $userRole = $_POST['user_role'];
-
-    //    $postImage = $_FILES['image']['name'];
-    //    $postImageTemp = $_FILES['image']['tmp_name'];
-
-       $userName = $_POST['username'];
-       $userEmail = $_POST['user_email'];
-       $userPassword = $_POST['user_password'];
-    //    $postDate = date('d-m-y');
 
 
-      
-        //move uploaded images to location
-    //    move_uploaded_file($postImageTemp, "images/$postImage");
+        if(isset($_POST['edit_user'])) {
+            $userFirstname = $_POST['user_firstname'];
+        $userLastname = $_POST['user_lastname'];
+        $userRole = $_POST['user_role'];
+
+        //    $postImage = $_FILES['image']['name'];
+        //    $postImageTemp = $_FILES['image']['tmp_name'];
+
+        $userName = $_POST['username'];
+        $userEmail = $_POST['user_email'];
+        $userPassword = $_POST['user_password'];
+        //    $postDate = date('d-m-y');
+
+
         
-        $query = "UPDATE users SET ";
-        $query .="user_firstname = '{$userFirstname}', ";
-        $query .="user_lastname = '{$userLastname}', ";
-        $query .="username = '{$userName}', ";
-        $query .="user_role = '{$userRole}', ";
-        $query .="user_email = '{$userEmail}', ";
-        $query .="user_password = '{$userPassword}' ";
-        $query .="WHERE user_id = {$userId} ";
+            //move uploaded images to location
+        //    move_uploaded_file($postImageTemp, "images/$postImage");
+            
+            $query = "UPDATE users SET ";
+            $query .="user_firstname = '{$userFirstname}', ";
+            $query .="user_lastname = '{$userLastname}', ";
+            $query .="username = '{$userName}', ";
+            $query .="user_role = '{$userRole}', ";
+            $query .="user_email = '{$userEmail}', ";
+            $query .="user_password = '{$userPassword}' ";
+            $query .="WHERE user_id = {$userId} ";
 
-        $editUserQuery = mysqli_query($dbConnect,$query);
-        checkQuery($editUserQuery);
-     
-    }
+            $editUserQuery = mysqli_query($dbConnect,$query);
+            
+        
+        }
 
     
 
