@@ -16,34 +16,45 @@
              $userImage = $row['user_image'];
              $userRole = $row['user_role'];
          }
+
+       
+
     }
-    // if(isset($_POST['edit_user'])) {
-    //    $userId = $_POST['user_id'];
-    //     $userFirstname = $_POST['user_firstname'];
-    //    $userLastname = $_POST['user_lastname'];
-    //    $userRole = $_POST['user_role'];
+    if(isset($_POST['edit_user'])) {
+        $userFirstname = $_POST['user_firstname'];
+       $userLastname = $_POST['user_lastname'];
+       $userRole = $_POST['user_role'];
 
-    // //    $postImage = $_FILES['image']['name'];
-    // //    $postImageTemp = $_FILES['image']['tmp_name'];
+    //    $postImage = $_FILES['image']['name'];
+    //    $postImageTemp = $_FILES['image']['tmp_name'];
 
-    //    $userName = $_POST['username'];
-    //    $userEmail = $_POST['user_email'];
-    //    $userPassword = $_POST['user_password'];
-    // //    $postDate = date('d-m-y');
+       $userName = $_POST['username'];
+       $userEmail = $_POST['user_email'];
+       $userPassword = $_POST['user_password'];
+    //    $postDate = date('d-m-y');
 
 
       
-    //     //move uploaded images to location
-    // //    move_uploaded_file($postImageTemp, "images/$postImage");
+        //move uploaded images to location
+    //    move_uploaded_file($postImageTemp, "images/$postImage");
         
-    //    $query = "INSERT INTO users(user_firstname, user_lastname, user_role,username,user_email,user_password) ";
-    //    $query .= "VALUES('{$userFirstname}','{$userLastname}','{$userRole}','{$userName}','{$userEmail}','{$userPassword}') ";
+        $query = "UPDATE users SET ";
+        $query .="user_firstname = '{$userFirstname}', ";
+        $query .="user_lastname = '{$userLastname}', ";
+        $query .="username = '{$userName}', ";
+        $query .="user_role = '{$userRole}', ";
+        $query .="user_email = '{$userEmail}', ";
+        $query .="user_password = '{$userPassword}' ";
+        $query .="WHERE user_id = {$userId} ";
 
-    //    $createUserQuery = mysqli_query($dbConnect, $query);
-
-    //    checkQuery($createUserQuery);
+        $editUserQuery = mysqli_query($dbConnect,$query);
+        checkQuery($editUserQuery);
      
-    // }
+    }
+
+    
+
+
 ?>
 
 
@@ -63,9 +74,15 @@
     <div class="form-group">
         <label for="post_category_id">Role: </label><br>
        <select class="form-select form-select-lg mb-3" name="user_role" id="">
-        <option value="subscriber">Select Options:</option>
-          <option value="admin">Admin</option>
-          <option value="subscriber">Subscriber</option>
+        <option value="subscriber"><?php echo $userRole ?></option>
+           <?php 
+            if($userRole == 'Admin') {
+                echo "<option value='subscriber'>Subscriber</option>";
+            } else {
+                echo "<option value='admin'>Admin</option>";
+            }
+           
+           ?>
        </select>
     </div>
 
@@ -91,6 +108,6 @@
 
 
  <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="edit_user" value="Edit User">
+        <input class="btn btn-primary" type="submit" name="edit_user" value="Update User">
     </div>
 </form>
