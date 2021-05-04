@@ -46,8 +46,8 @@
         <label for="post_category_id">Role: </label><br>
        <select class="form-select form-select-lg mb-3" name="user_role" id="">
         <option value="subscriber">Select Options:</option>
-          <option value="admin">Admin</option>
-          <option value="subscriber">Subscriber</option>
+          <option value="admin">admin</option>
+          <option value="subscriber">subscriber</option>
        </select>
     </div>
 

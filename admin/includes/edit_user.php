@@ -76,10 +76,10 @@
        <select class="form-select form-select-lg mb-3" name="user_role" id="">
         <option value="subscriber"><?php echo $userRole ?></option>
            <?php 
-            if($userRole == 'Admin') {
-                echo "<option value='subscriber'>Subscriber</option>";
+            if($userRole == 'admin') {
+                echo "<option value='subscriber'>subscriber</option>";
             } else {
-                echo "<option value='admin'>Admin</option>";
+                echo "<option value='admin'>admin</option>";
             }
            
            ?>

@@ -7,7 +7,7 @@
            }
     }
 
-    
+
     function insertCategory() {
         global $dbConnect;
         if(isset($_POST['submit'])) {
@@ -57,6 +57,14 @@
 
             $deleteQuery = mysqli_query($dbConnect, $query);
             header("Location: categories.php"); // refreshes the page
+        }
+    }
+    function checkUserRole() {
+        global $dbConnect;
+        if(isset($_SESSION['role'])) {
+            if($_SESSION['role'] !== 'admin') {
+                header("Location: ../index.php");
+            }
         }
     }
 

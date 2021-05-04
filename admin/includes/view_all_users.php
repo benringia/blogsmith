@@ -54,8 +54,8 @@
             //     echo "<td><a href='../post.php?p_id=$postId'>$postTitle</a></td>";
             // }
             
-            echo "<td><a href='users.php?admin={$userId}'>Admin</a></td>";
-            echo "<td><a href='users.php?subscriber={$userId}'>Subscriber</a></td>";
+            echo "<td><a href='users.php?admin={$userId}'>admin</a></td>";
+            echo "<td><a href='users.php?subscriber={$userId}'>subscriber</a></td>";
             echo "<td><a href='users.php?source=edit_user&edit_user={$userId}'>Edit</a></td>";
             echo "<td><a href='users.php?delete={$userId}'>Delete</a></td>";
             echo "</tr>";
@@ -68,7 +68,7 @@
             if(isset($_GET['admin'])) {
                 $userId = $_GET['admin'];
 
-                $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = {$userId} ";
+                $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$userId} ";
                 $changeAdminQuery = mysqli_query($dbConnect, $query);
                 header("Location: users.php");
             }
@@ -78,9 +78,9 @@
                 if(isset($_GET['subscriber'])) {
                     $changeSubsQuery = $_GET['subscriber'];
 
-                    $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = {$userId} ";
+                    $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$userId} ";
                     $changeSubsQuery = mysqli_query($dbConnect, $query);
-                    // header("Location: users.php");
+                    header("Location: users.php");
                 }
 
 
