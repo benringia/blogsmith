@@ -1,9 +1,26 @@
 <?php include "includes/admin_header.php" ?>
+<?php    
+    $query = "SELECT * FROM posts ";
+    $selectAllPost = mysqli_query($dbConnect, $query);
+    $postCount = mysqli_num_rows($selectAllPost);
+    
+    $query = "SELECT * FROM comments ";
+    $selectAllComments = mysqli_query($dbConnect, $query);
+    $commentCount = mysqli_num_rows($selectAllComments);
+
+    $query = "SELECT * FROM users ";
+    $selectAllUsers = mysqli_query($dbConnect, $query);
+    $userCount = mysqli_num_rows($selectAllUsers);
+
+    $query = "SELECT * FROM categories ";
+    $selectAllCategories = mysqli_query($dbConnect, $query);
+    $categoryCount = mysqli_num_rows($selectAllCategories);
+?>
+
+
+
 
     <div id="wrapper">
-
-     
-
         <!-- Navigation -->
     <?php include "includes/admin_navigation.php" ?>
 
@@ -44,9 +61,9 @@
                         <i class="fa fa-file-text fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                  <div class='huge'>12</div>
-                        <div>Posts</div>
-                    </div>
+                        <div class='huge'><?php echo $postCount?></div>
+                                <div>Posts</div>
+                            </div>
                 </div>
             </div>
             <a href="posts.php">
@@ -66,7 +83,12 @@
                         <i class="fa fa-comments fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                     <div class='huge'>23</div>
+                    <?php 
+                        $query = "SELECT * FROM comments ";
+                        $selectAllComments = mysqli_query($dbConnect, $query);
+                        $commentCount = mysqli_num_rows($selectAllComments);
+                    ?>
+                     <div class='huge'><?php echo $commentCount?></div>
                       <div>Comments</div>
                     </div>
                 </div>
@@ -88,7 +110,7 @@
                         <i class="fa fa-user fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                    <div class='huge'>23</div>
+                    <div class='huge'><?php echo $userCount ?></div>
                         <div> Users</div>
                     </div>
                 </div>
@@ -110,7 +132,7 @@
                         <i class="fa fa-list fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class='huge'>13</div>
+                        <div class='huge'><?php echo $categoryCount?></div>
                          <div>Categories</div>
                     </div>
                 </div>
