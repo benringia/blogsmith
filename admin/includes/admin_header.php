@@ -19,8 +19,12 @@
     <title>BlogSmith Admin</title>
 
     <!-- Bootstrap Core CSS -->
+   
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">

@@ -57,6 +57,19 @@
         }
 
 ?>
+<?php 
+
+        // function check_post_status() {
+        //     if($postStatus == 'PUBLISHED') {
+        //         echo "<option value='DRAFT'>DRAFT</option>";
+        //     } else { 
+        //         echo "<option value='PUBLISHED'>PUBLISHED</option>"; 
+        //         }
+        // }
+                
+               
+                    
+                    ?>
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
@@ -87,15 +100,27 @@
         <input value ="<?php echo $postAuthor?>" type="text" class="form-control" name="post_author">
     </div>
 
-    <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input value ="<?php echo $postStatus?>" type="text" class="form-control" name="post_status">
-    </div>
+        
+        <div class="form-group">
+            <label for="post_status">Post Status</label><br>
+            <select class="form-control form-control-sm" name="post_status" id="">
+                <option value='<?php $postStatus?>'><?php echo $postStatus?></option>
+                <?php 
+                      if($postStatus == 'PUBLISHED') {
+                        echo "<option value='DRAFT'>DRAFT</option>";
+                    } else { 
+                        echo "<option value='PUBLISHED'>PUBLISHED</option>"; 
+                        }
+                ?>
+            </select>
+        </div>
+
+ 
 
     <div class="form-group">
         <label for="image">Post Image</label><br>
         <img width=100 src="images/<?php echo $postImage?>" alt="">
-        <input type="file" name="image">
+        <input type="file" class="form-control-file" name="image">
     </div>
 
     <div class="form-group">

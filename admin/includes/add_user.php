@@ -24,6 +24,8 @@
        $createUserQuery = mysqli_query($dbConnect, $query);
 
        checkQuery($createUserQuery);
+
+       echo "User Created: ". " " ."<a href='users.php'>View user</a>";
      
     }
 ?>

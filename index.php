@@ -11,6 +11,10 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+                <h1 class="page-header">
+                        User Posts
+                        <small></small>
+                    </h1>
                 <?php 
                     $query = "SELECT * FROM posts ";
 
@@ -19,23 +23,19 @@
                     while($row = mysqli_fetch_assoc($allPostsQuery)) {
                         $postId =  $row['post_id'];
                         $postTitle =  $row['post_title'];
-                       $postAuthor =  $row['post_author'];
-                       $postDate =  $row['post_date'];
-                       $postImage =  $row['post_image'];
-                       $postContent =  substr($row['post_content'],0,100); //for doing excerp
+                        $postAuthor =  $row['post_author'];
+                        $postDate =  $row['post_date'];
+                        $postImage =  $row['post_image'];
+                        $postContent =  substr($row['post_content'],0,100); //for doing excerp
                         $postStatus = $row['post_status'];
 
-                         if($postStatus !== 'PUBLISHED') {
-                            echo "<h1> No post found</h1>";
-                         } else {
+                         if($postStatus == 'PUBLISHED') {
+                           
 
                          
                        ?>
 
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+                
 
                 <!-- First Blog Post -->
                 <h2>
