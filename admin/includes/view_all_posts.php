@@ -22,7 +22,7 @@ if(isset($_POST['checkBoxArray'])) {
 
     <table class="table table-bordered table-hover">
 
-    <div id="bulkOptionsContainer" class="col-xs-4">
+    <div id="bulkOptionsContainer" class="col-xs-4" style="margin-bottom: 10px;">
         <select class="form-control" name="bulk_options" id="">
             <option value="">Select Options</option>
             <option value="PUBLISHED">Publish</option>
