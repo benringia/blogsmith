@@ -41,13 +41,21 @@
             //move uploaded images to location
         //    move_uploaded_file($postImageTemp, "images/$postImage");
             
+            $query = "SELECT randSalt FROM users ";
+            $select_randsalt_query = send_query($dbConnect,$query);
+            checkQuery($select_randsalt_query);
+
+            $row = mysqli_fetch_array($select_randsalt_query);
+            $salt = $row['randSalt'];
+            $hashed_password = crypt($userPassword, $salt);
+            
             $query = "UPDATE users SET ";
             $query .="user_firstname = '{$userFirstname}', ";
             $query .="user_lastname = '{$userLastname}', ";
             $query .="username = '{$userName}', ";
             $query .="user_role = '{$userRole}', ";
             $query .="user_email = '{$userEmail}', ";
-            $query .="user_password = '{$userPassword}' ";
+            $query .="user_password = '{$hashed_password}' ";
             $query .="WHERE user_id = {$userId} ";
 
             $editUserQuery = mysqli_query($dbConnect,$query);

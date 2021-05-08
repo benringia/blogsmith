@@ -1,10 +1,6 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
- <?php 
-     function send_query($database_connection,$database_query) {
-        return mysqli_query($database_connection,$database_query);
-    };
- ?>
+
 
 <?php 
     if(isset($_POST['submit'])) {
@@ -18,6 +14,7 @@
     
             $row = mysqli_fetch_array($select_random_salt); 
             $salt = $row['randSalt'];
+            $password = crypt($password, $salt);
     
             $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
             $query .= "VALUES('$username','$email','$password','subscriber' )";
@@ -26,9 +23,9 @@
             if(! $register_new_user) {
                 die("ERROR: " . mysqli_error($dbConnect) );
             }
-            $message = "Registration Successful!";
+            $message = "<h6 class='text-center success-popup'>Registration Successful!</h6>";
         } else {
-            $message = "Fields cannot be empty";
+            $message = "<h6 class='text-center danger-popup'>Fields cannot be empty</h6>";
         }
 
         $username = mysqli_real_escape_string($dbConnect, $username);
@@ -53,9 +50,10 @@
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
-                <h1>Register</h1>
+                <h1 style="margin-bottom: 30px">Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                        <h6 class="text-center"><?php echo $message?></h6>
+                        <?php echo $message?>
+                        
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
@@ -69,7 +67,7 @@
                             <input type="password" name="password" id="key" class="form-control" placeholder="Password">
                         </div>
                 
-                        <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
+                        <input type="submit" name="submit" id="btn-login" class="btn btn-info btn-lg btn-block" value="Register">
                     </form>
                  
                 </div>

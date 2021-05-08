@@ -1,0 +1,10 @@
+.success-popup,.danger-popup {
+    font-size: 18px;
+    background: #00B74A;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fafafa;
+}
+.danger-popup {
+    background: #F93154;
+}
