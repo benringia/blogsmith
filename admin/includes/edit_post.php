@@ -55,7 +55,7 @@
             $update_post = mysqli_query($dbConnect,$query);
             checkQuery($update_post);
 
-            // echo "<p class='bg-success font-weight-bold'>Post Updated. <br><a class='' href='../post.php?p_id=$getId'>View Changes</a> or <a class='' href='post.php'>Edit More Post</a></p>";
+            echo "<p class='bg-success font-weight-bold'>Post Updated. <br><a class='' href='./post.php?p_id=$getId'>View Changes</a> or <a class='' href='posts.php'>Edit More Post</a></p>";
         }
 
 ?>

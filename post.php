@@ -56,16 +56,20 @@
                         $commentAuthor = $_POST['comment_author'];
                         $commentEmail = $_POST['comment_email'];
                         $commentContent = $_POST['comment_content'];
-                        
 
-                        // $postId = $_GET['p_id'];
-                        $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
-                        $query .= "VALUES ($postId, '$commentAuthor', '$commentEmail', '$commentContent', 'Denied', now()) ";
-                       
-                        $createCommentQuery = mysqli_query($dbConnect, $query);
 
-                        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $postId ";
-                        $updateCommentCount = mysqli_query($dbConnect, $query);
+                        //VALIDATE IF FIELDS ARE EMPTY
+                        if(!empty($commentAuthor) && !empty($commentEmail) && !empty($commentContent) ) {
+                            $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
+                            $query .= "VALUES ($postId, '$commentAuthor', '$commentEmail', '$commentContent', 'Denied', now()) ";
+                           
+                            $createCommentQuery = mysqli_query($dbConnect, $query);
+    
+                            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $postId ";
+                            $updateCommentCount = mysqli_query($dbConnect, $query);
+                        } else {
+                            echo '<script>alert("Fields Cannot Be Empty")</script>';
+                        }
                     }
                 ?>
                 <!-- comments Form -->
