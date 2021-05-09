@@ -8,3 +8,7 @@
 .danger-popup {
     background: #F93154;
 }
+
+.pager li .active_link {
+    background: #000 !important;
+}

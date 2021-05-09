@@ -11,33 +11,12 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-            <?php
-                $posts_to_display = 5;        
-                $published_posts_count = ceil($published_posts_count / $posts_to_display);
-                
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                    $page_start = $posts_to_display * ($page - 1);
-                } else {
-                    $page_start = 0;
-                }
-                                
-            ?>
-            
                 <h1 class="page-header">
                         User Posts
                         <small></small>
                     </h1>
                 <?php 
-                    //POST COUNT QUERY
-                    $count_post_query = "SELECT * FROM posts ";
-                    $post_count_result = mysqli_query($dbConnect, $count_post_query);
-                    $count_result = mysqli_num_rows($post_count_result);
-                    
-                    $count_result = ceil($count_result / 5);
-
-                    //POST DISPLAYED QUERY
-                    $query = "SELECT * FROM posts WHERE post_status='PUBLISHED' LIMIT $page_start, $posts_to_display";
+                    $query = "SELECT * FROM posts ";
 
                     $allPostsQuery = mysqli_query($dbConnect, $query);
 
@@ -81,22 +60,13 @@
                
 
                 <!-- Pager -->
-              
                 <ul class="pager">
-                    <!-- <li class="previous">
+                    <li class="previous">
                         <a href="#">&larr; Older</a>
                     </li>
                     <li class="next">
                         <a href="#">Newer &rarr;</a>
-                    </li> -->
-                    <?php 
-                        for($i = 1; $i <= $count_result; $i++) {
-                            if($i == $page_start) {
-                                echo "<li><a class='active_link' href='index.php?page=$i'>$i</a></li>";
-                            } else
-                            echo "<li><a href='index.php?page=$i'>$i</a></li>";
-                        }
-                    ?>
+                    </li>
                 </ul>
 
             </div>
