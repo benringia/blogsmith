@@ -23,6 +23,30 @@ if(isset($_POST['checkBoxArray'])) {
                 $delete_post = mysqli_query($dbConnect,$query);
             break;
 
+            case 'clone':
+                $query = "SELECT * FROM posts WHERE post_id = {$checkboxPostId} ";
+                $select_post_query = mysqli_query($dbConnect,$query);
+
+                while($row = mysqli_fetch_array($select_post_query)) {
+                    $postTitle = $row['post_title'];
+                    $postCategoryId = $row['post_category_id'];
+                    $postDate = $row['post_date'];
+                    $postAuthor = $row['post_author'];
+                    $postStatus = $row['post_status'];
+                    $postImage = $row['post_image'];
+                    $postTags = $row['post_tags'];
+                    $postContent = $row['post_content'];
+                }
+
+                $query = "INSERT INTO posts(post_title, post_category_id, post_date, post_author, post_status, post_image, post_tags, post_content) ";
+                $query .= "VALUES('$postTitle', $postCategoryId, now(), '$postAuthor', '$postStatus', '$postImage', '$postTags', '$postContent') ";
+                $copy_query = mysqli_query($dbConnect, $query);
+
+                if(!$copy_query) {
+                    die("ERROR : " . mysqli_error($dbConnect));
+                }
+            break;
+
          }
     }
 }
@@ -38,6 +62,7 @@ if(isset($_POST['checkBoxArray'])) {
             <option value="PUBLISHED">Publish</option>
             <option value="DRAFT">Draft</option>
             <option value="delete">Delete</option>
+            <option value="clone">Clone</option>
         </select>
     </div>
     <div class="col-xs-4">
@@ -63,7 +88,7 @@ if(isset($_POST['checkBoxArray'])) {
         <tbody>
             <?php 
             
-            $query = "SELECT * FROM posts";
+            $query = "SELECT * FROM posts ORDER BY post_id DESC ";
             $selectPosts = mysqli_query($dbConnect,$query);
 
             while($row = mysqli_fetch_assoc($selectPosts)) {
