@@ -89,14 +89,26 @@
                     <li class="next">
                         <a href="#">Newer &rarr;</a>
                     </li> -->
-                    <?php 
-                        for($i = 1; $i <= $count_result; $i++) {
-                            if($i == $page_start) {
-                                echo "<li><a class='active_link' href='index.php?page=$i'>$i</a></li>";
-                            } else
-                            echo "<li><a href='index.php?page=$i'>$i</a></li>";
-                        }
-                    ?>
+                    <?php
+
+                if($page != 1){
+                    $prev_page = $page - 1;
+                    echo "<li><a href='index.php?page={$prev_page}'>PREV</a></li>";
+                }
+                
+                for($i = 1; $i <= $count ; $i++){
+                    if($i == $page || ($i == 1 && $page == 1)){
+                    echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
+                    } else {
+                        echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+                    }
+                }
+
+                if($page != $count){
+                    $next_page = $page + 1;
+                    echo "<li><a href='index.php?page={$next_page}'>NEXT</a></li>";
+                    }
+            ?>
                 </ul>
 
             </div>
