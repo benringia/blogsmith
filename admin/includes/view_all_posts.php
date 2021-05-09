@@ -82,6 +82,7 @@ if(isset($_POST['checkBoxArray'])) {
                 <th>Tags</th>
                 <th>Comments</th>
                 <th>Date</th>
+                <th>Views</th>
                 <th colspan="3" class="text-center">Actions</th>
             </tr>
         </thead>
@@ -101,6 +102,7 @@ if(isset($_POST['checkBoxArray'])) {
                 $postStatus = $row['post_status'];
                 $postComments = $row['post_comment_count'];
                 $postCategoryId = $row['post_category_id'];
+                $postViewCount = $row['post_view_count'];
 
                 echo "<tr>";
                 ?>
@@ -126,6 +128,7 @@ if(isset($_POST['checkBoxArray'])) {
                 echo "<td>{$postTags}</td>";
                 echo "<td>{$postComments}</td>";
                 echo "<td>{$postDate}</td>";
+                echo "<td><a href='posts.php?reset={$postId}'>{$postViewCount}</a></td>";
                 echo "<td><a href='../post.php?p_id={$postId}'>View</a></td>";
                 echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Edit</a></td>";
                 echo "<td><a onClick=\"javascript: return confirm('Delete Item?'); \" href='posts.php?delete={$postId}'>Delete</a></td>";
@@ -141,6 +144,17 @@ if(isset($_POST['checkBoxArray'])) {
 
                     $query = "DELETE FROM posts WHERE post_id = {$post_id} ";
                     $deleteQuery = mysqli_query($dbConnect, $query);
+                    header("Location: posts.php");
+                    }
+
+                if(isset($_GET['reset'])) {
+                    
+                    $post_id = mysqli_real_escape_string($dbConnect,$_GET['reset']);
+                    $query = "UPDATE posts SET post_view_count = 0 WHERE post_id = $post_id ";
+                    $resetQuery = mysqli_query($dbConnect, $query);
+                    if(!$resetQuery) {
+                        die("ERROR : " . mysqli_error($dbConnect));
+                    }
                     header("Location: posts.php");
                     }
             ?>

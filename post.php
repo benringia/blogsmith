@@ -15,20 +15,27 @@
 
                     if(isset($_GET['p_id'])) {
                         $postId = $_GET['p_id'];
-                    }
 
-                    $query = "SELECT * FROM posts WHERE post_id = $postId ";
+                        $set_query = "UPDATE posts SET post_view_count = post_view_count + 1 WHERE post_id = $postId ";
+                        $send_query = mysqli_query($dbConnect, $set_query);
+                        
+                        if(!$send_query) {
+                            die("ERROR : " . mysqli_error($dbConnect));
+                        }
+                    
 
-                    $allPostsQuery = mysqli_query($dbConnect, $query);
+                        $query = "SELECT * FROM posts WHERE post_id = $postId ";
 
-                    while($row = mysqli_fetch_assoc($allPostsQuery)) {
-                       $postTitle =  $row['post_title'];
-                       $postAuthor =  $row['post_author'];
-                       $postDate =  $row['post_date'];
-                       $postImage =  $row['post_image'];
-                       $postContent =  $row['post_content'];
+                        $allPostsQuery = mysqli_query($dbConnect, $query);
 
-                       ?>
+                        while($row = mysqli_fetch_assoc($allPostsQuery)) {
+                        $postTitle =  $row['post_title'];
+                        $postAuthor =  $row['post_author'];
+                        $postDate =  $row['post_date'];
+                        $postImage =  $row['post_image'];
+                        $postContent =  $row['post_content'];
+
+                        ?>
 
                 <h1 class="page-header">
                     Page Heading
@@ -49,7 +56,10 @@
                     <p><?php echo $postContent ?></p>
 
                 <hr>
-                <?php } ?>
+                <?php } } else {
+                        header("Location: index.php"); 
+                     } 
+                    ?>
 
                 <?php
                     if(isset($_POST['create_comment'])) {
