@@ -85,7 +85,7 @@
     <div class="form-group">
         <label for="post_category_id">Role: </label><br>
        <select class="form-select form-select-lg mb-3" name="user_role" id="">
-        <option value="subscriber"><?php echo $userRole ?></option>
+        <option value="<?php echo $userRole ?>"><?php echo $userRole ?></option>
            <?php 
             if($userRole == 'admin') {
                 echo "<option value='subscriber'>subscriber</option>";
