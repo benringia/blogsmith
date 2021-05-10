@@ -18,27 +18,7 @@
 ?>
 
     
-    <?php 
-    //ONLINE USER
-        $session = session_id();
-        $time = time();
-        $time_out_sec = 60;
-        $time_out = $time - $time_out_sec;
-
-        $query = "SELECT * FROM users_online WHERE session = '$session' ";
-        $send = mysqli_query($dbConnect, $query);
-        $count = mysqli_num_rows($send);
-
-        if($count == NULL) {
-            mysqli_query($dbConnect, "INSERT INTO users_online(session, time) VALUES('$session','$time')");
-        } else {
-            mysqli_query($dbConnect, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
-        }
-
-        $users_online_query = mysqli_query($dbConnect, "SELECT * FROM users_online WHERE time > '$time_out' ");
-        
-        $count_user = mysqli_num_rows($users_online_query);
-    ?>
+ 
 
 
 
