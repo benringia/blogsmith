@@ -11,6 +11,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
+            <li><a href="../index.php"><i class="fa fa-user"></i>&nbsp;Online Users: <?php echo $count_user; ?></a></li>
                 <li><a href="../index.php"><i class="fa fa-home"></i></a></li>
 
 
