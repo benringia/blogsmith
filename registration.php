@@ -9,12 +9,18 @@
         $password = $_POST['password'];
 
         if(!empty($username) && !empty($email) && !empty($password )) {
-            $query = "SELECT randSalt FROM users ";
-            $select_random_salt = send_query($dbConnect,$query);
+            // $query = "SELECT randSalt FROM users ";
+            // $select_random_salt = send_query($dbConnect,$query);
     
-            $row = mysqli_fetch_array($select_random_salt); 
-            $salt = $row['randSalt'];
-            $password = crypt($password, $salt);
+            // $row = mysqli_fetch_array($select_random_salt); 
+            // $salt = $row['randSalt'];
+            // $password = crypt($password, $salt);
+            
+            $username = mysqli_real_escape_string($dbConnect, $username);
+            $email    = mysqli_real_escape_string($dbConnect, $email);
+            $password = mysqli_real_escape_string($dbConnect, $password);
+    
+            $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
     
             $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
             $query .= "VALUES('$username','$email','$password','subscriber' )";
@@ -28,9 +34,7 @@
             $message = "<h6 class='text-center danger-popup'>Fields cannot be empty</h6>";
         }
 
-        $username = mysqli_real_escape_string($dbConnect, $username);
-        $email    = mysqli_real_escape_string($dbConnect, $email);
-        $password = mysqli_real_escape_string($dbConnect, $password);
+       
     } else {
         $message='';
     }

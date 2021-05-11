@@ -44,7 +44,7 @@
    
    
   }
-  setInterval(function() {
+  setInterval ( () => {
     loadUsersOnline();
   }, 500)
   
