@@ -5,27 +5,29 @@
         if(isset($_GET['onlineusers'])) {
             
             global $dbConnect;
+            
 
             if(!$dbConnect) {
                 session_start();
-                // include('../includes/db.php');
-                require_once __DIR__ . '../includes/db.php';
+                // include '../includes/db.php';
+                include('../includes/db.php');
+                
             
 
-            $session = session_id();
-            $time = time();
-            $time_out_sec = 60;
-            $time_out = $time - $time_out_sec;
+                $session = session_id();
+                $time = time();
+                $time_out_sec = 60;
+                $time_out = $time - $time_out_sec;
 
-            $query = "SELECT * FROM users_online WHERE session = '$session' ";
-            $send = mysqli_query($dbConnect, $query);
-            $count = mysqli_num_rows($send);
+                $query = "SELECT * FROM users_online WHERE session = '$session' ";
+                $send = mysqli_query($dbConnect, $query);
+                $count = mysqli_num_rows($send);
 
-            if($count == NULL) {
-                mysqli_query($dbConnect, "INSERT INTO users_online(session, time) VALUES('$session','$time')");
-            } else {
-                mysqli_query($dbConnect, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
-            }
+                if($count == NULL) {
+                    mysqli_query($dbConnect, "INSERT INTO users_online(session, time) VALUES('$session','$time')");
+                } else {
+                    mysqli_query($dbConnect, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+                }
 
                 $users_online_query = mysqli_query($dbConnect, "SELECT * FROM users_online WHERE time > '$time_out' ");
                 
