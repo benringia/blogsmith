@@ -5,18 +5,12 @@
        $userLastname = $_POST['user_lastname'];
        $userRole = $_POST['user_role'];
 
-    //    $postImage = $_FILES['image']['name'];
-    //    $postImageTemp = $_FILES['image']['tmp_name'];
-
        $userName = $_POST['username'];
        $userEmail = $_POST['user_email'];
        $userPassword = $_POST['user_password'];
-    //    $postDate = date('d-m-y');
 
-
-      
-        //move uploaded images to location
-    //    move_uploaded_file($postImageTemp, "images/$postImage");
+       $userPassword = password_hash($userPassword, PASSWORD_BCRYPT, array('cost' => 10));
+    
         
        $query = "INSERT INTO users(user_firstname, user_lastname, user_role,username,user_email,user_password) ";
        $query .= "VALUES('{$userFirstname}','{$userLastname}','{$userRole}','{$userName}','{$userEmail}','{$userPassword}') ";

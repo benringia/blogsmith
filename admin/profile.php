@@ -15,7 +15,7 @@
             $userFirstname = $row['user_firstname'];
             $userLastname = $row['user_lastname'];
             $userEmail = $row['user_email'];
-            $userRole = $row['user_role'];
+            
         } 
     }
 
@@ -42,7 +42,6 @@
         $query .="user_firstname = '{$userFirstname}', ";
         $query .="user_lastname = '{$userLastname}', ";
         $query .="username = '{$userName}', ";
-        $query .="user_role = '{$userRole}', ";
         $query .="user_email = '{$userEmail}', ";
         $query .="user_password = '{$userPassword}' ";
         $query .="WHERE username = '{$username}' ";
@@ -85,21 +84,7 @@
         <input type="text" value="<?php echo $userLastname ?>" class="form-control" name="user_lastname">
     </div>
 
-   
-    <div class="form-group">
-        <label for="post_category_id">Role: </label><br>
-       <select class="form-select form-select-lg mb-3" name="user_role" id="">
-        <option value="subscriber"><?php echo $userRole ?></option>
-           <?php 
-            if($userRole == 'admin') {
-                echo "<option value='subscriber'>subscriber</option>";
-            } else {
-                echo "<option value='admin'>admin</option>";
-            }
-           
-           ?>
-       </select>
-    </div>
+  
 
     <div class="form-group">
         <label for="username">Username</label>
@@ -108,7 +93,7 @@
 
     <div class="form-group">
         <label for="post_status">Email</label>
-        <input type="email" value="<?php echo $userEmail ?>" class="form-control" name="user_email">
+        <input autocomplete="off" type="email" value="" class="form-control" name="user_email">
     </div>
 <!-- 
     <div class="form-group">
@@ -118,7 +103,7 @@
 
     <div class="form-group">
         <label for="user-password">Password</label>
-        <input type="password" value="<?php echo $userPassword ?>" class="form-control"  name="user_password">
+        <input type="password" value="<?php //echo $userPassword ?>" class="form-control"  name="user_password">
     </div>
 
 
