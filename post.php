@@ -75,8 +75,8 @@
                            
                             $createCommentQuery = mysqli_query($dbConnect, $query);
     
-                            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $postId ";
-                            $updateCommentCount = mysqli_query($dbConnect, $query);
+                            // $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $postId ";
+                            // $updateCommentCount = mysqli_query($dbConnect, $query);
                         } else {
                             echo '<script>alert("Fields Cannot Be Empty")</script>';
                         }
