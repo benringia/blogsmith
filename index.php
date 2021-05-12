@@ -44,7 +44,7 @@
                     while($row = mysqli_fetch_assoc($allPostsQuery)) {
                         $postId =  $row['post_id'];
                         $postTitle =  $row['post_title'];
-                        $postAuthor =  $row['post_author'];
+                        $postAuthor =  $row['post_user'];
                         $postDate =  $row['post_date'];
                         $postImage =  $row['post_image'];
                         $postContent =  substr($row['post_content'],0,100); //for doing excerp

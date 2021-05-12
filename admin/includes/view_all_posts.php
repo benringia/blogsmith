@@ -32,14 +32,15 @@ if(isset($_POST['checkBoxArray'])) {
                     $postCategoryId = $row['post_category_id'];
                     $postDate = $row['post_date'];
                     $postAuthor = $row['post_author'];
+                    $post_user = $row['post_user'];
                     $postStatus = $row['post_status'];
                     $postImage = $row['post_image'];
                     $postTags = $row['post_tags'];
                     $postContent = $row['post_content'];
                 }
 
-                $query = "INSERT INTO posts(post_title, post_category_id, post_date, post_author, post_status, post_image, post_tags, post_content) ";
-                $query .= "VALUES('$postTitle', $postCategoryId, now(), '$postAuthor', '$postStatus', '$postImage', '$postTags', '$postContent') ";
+                $query = "INSERT INTO posts(post_title, post_category_id, post_date, post_user, post_status, post_image, post_tags, post_content) ";
+                $query .= "VALUES('$postTitle', $postCategoryId, now(), '$post_user', '$postStatus', '$postImage', '$postTags', '$postContent') ";
                 $copy_query = mysqli_query($dbConnect, $query);
 
                 if(!$copy_query) {

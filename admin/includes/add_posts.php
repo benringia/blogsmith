@@ -40,8 +40,8 @@
 
    
     <div class="form-group">
-        <label for="post_category_id">Post Category</label>
-       <select name="post_category" id="">
+        <label for="post_category_id">Post Category</label><br>
+       <select class="form-control form-control-sm" name="post_category" id="">
            <?php 
              $query = "SELECT * FROM categories ";
              $selectCategories = mysqli_query($dbConnect, $query);
@@ -58,8 +58,8 @@
     </div>
 
     <div class="form-group">
-        <label for="users">Users</label>
-       <select name="post_user" id="">
+        <label for="users">Users</label><br>
+       <select class="form-control form-control-sm" name="post_user" id="">
            <?php 
              $query = "SELECT * FROM users ";
              $select_users = mysqli_query($dbConnect, $query);
@@ -81,8 +81,8 @@
     </div> -->
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <select name="post_status" id="">
+        <label for="post_status">Post Status</label><br>
+        <select class="form-control form-control-sm" name="post_status" id="">
             <option value="draft">Select Options</option>
             <option value="PUBLISHED">PUBLISHED</option>
             <option value="DRAFT">DRAFT</option>
