@@ -1,7 +1,7 @@
 <?php 
     if(isset($_POST['create_post'])) {
        $postTitle = $_POST['title'];
-       $postAuthor = $_POST['post_author'];
+       $post_user = $_POST['post_user'];
        $postCategoryId = $_POST['post_category'];
        $postStatus = $_POST['post_status'];
 
@@ -18,8 +18,8 @@
         //move uploaded images to location
        move_uploaded_file($postImageTemp, "images/$postImage");
         
-       $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date,post_image,post_content,post_tags,post_status) ";
-       $query .= "VALUES({$postCategoryId},'{$postTitle}','{$postAuthor}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}') ";
+       $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date,post_image,post_content,post_tags,post_status) ";
+       $query .= "VALUES({$postCategoryId},'{$postTitle}','{$post_user}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}') ";
 
        $createPostQuery = mysqli_query($dbConnect, $query);
 
@@ -58,9 +58,27 @@
     </div>
 
     <div class="form-group">
+        <label for="users">Users</label>
+       <select name="post_user" id="">
+           <?php 
+             $query = "SELECT * FROM users ";
+             $select_users = mysqli_query($dbConnect, $query);
+             checkQuery($select_users);
+
+            while($row = mysqli_fetch_assoc($select_users)) {
+                $user_id =  $row['user_id'];
+                $username =  $row['username'];
+                echo "<option value='$username'>$username</option>";
+            } 
+                
+           ?>
+       </select>
+    </div>
+
+    <!-- <div class="form-group">
         <label for="post_author">Post Author</label>
         <input type="text" class="form-control" name="post_author">
-    </div>
+    </div> -->
 
     <div class="form-group">
         <label for="post_status">Post Status</label>

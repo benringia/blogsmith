@@ -74,7 +74,7 @@ if(isset($_POST['checkBoxArray'])) {
             <tr>
                 <th><input type="checkbox" id="selectAllBoxes"></th>
                 <th>id</th>
-                <th>Author</th>
+                <th>User</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Status</th>
@@ -96,6 +96,7 @@ if(isset($_POST['checkBoxArray'])) {
                 $postId = $row['post_id'];
                 $postTitle = $row['post_title'];
                 $postAuthor = $row['post_author'];
+                $post_user = $row['post_user'];
                 $postDate = $row['post_date'];
                 $postImage = $row['post_image'];
                 $postTags = $row['post_tags'];
@@ -111,7 +112,13 @@ if(isset($_POST['checkBoxArray'])) {
                 <?php
 
                 echo "<td>{$postId}</td>";
-                echo "<td>{$postAuthor}</td>";
+
+                if(!empty($postAuthor)) {
+                    echo "<td>{$postAuthor}</td>";
+                } elseif(!empty($post_user)) {
+                    echo "<td>{$post_user}</td>";
+                }
+                
                 echo "<td>{$postTitle}</td>";
 
                 $query = "SELECT * FROM categories WHERE cat_id = $postCategoryId";
