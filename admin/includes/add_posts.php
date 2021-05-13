@@ -1,16 +1,16 @@
 <?php 
     if(isset($_POST['create_post'])) {
-       $postTitle = $_POST['title'];
-       $post_user = $_POST['post_user'];
-       $postCategoryId = $_POST['post_category'];
-       $postStatus = $_POST['post_status'];
+       $postTitle = escape($_POST['title']);
+       $post_user = escape($_POST['post_user']);
+       $postCategoryId = escape($_POST['post_category']);
+       $postStatus = escape($_POST['post_status']);
 
-       $postImage = $_FILES['image']['name'];
-       $postImageTemp = $_FILES['image']['tmp_name'];
+       $postImage = escape($_FILES['image']['name']);
+       $postImageTemp = escape($_FILES['image']['tmp_name']);
 
-       $postTags = $_POST['post_tags'];
-       $postContent = $_POST['post_content'];
-       $postDate = date('d-m-y');
+       $postTags = escape($_POST['post_tags']);
+       $postContent = escape($_POST['post_content']);
+       $postDate = escape(date('d-m-y'));
     //    $post_comment_count = 4;
 
 

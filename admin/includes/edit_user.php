@@ -24,16 +24,16 @@
 
 
         if(isset($_POST['edit_user'])) {
-            $userFirstname = $_POST['user_firstname'];
-            $userLastname = $_POST['user_lastname'];
-            $userRole = $_POST['user_role'];
+            $userFirstname = escape($_POST['user_firstname']);
+            $userLastname = escape($_POST['user_lastname']);
+            $userRole = escape($_POST['user_role']);
 
             //    $postImage = $_FILES['image']['name'];
             //    $postImageTemp = $_FILES['image']['tmp_name'];
 
-            $userName = $_POST['username'];
-            $userEmail = $_POST['user_email'];
-            $userPassword = $_POST['user_password'];
+            $userName = escape($_POST['username']);
+            $userEmail = escape($_POST['user_email']);
+            $userPassword = escape($_POST['user_password']);
         
             
             if(!empty($userPassword)) {

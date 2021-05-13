@@ -62,7 +62,7 @@
 
         <?php 
             if(isset($_GET['approve'])) {
-                $commentId = $_GET['approve'];
+                $commentId = escape($_GET['approve']);
 
                 $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = {$commentId} ";
                 $approveCommentQuery = mysqli_query($dbConnect, $query);
@@ -72,7 +72,7 @@
 
                 //DENY COMMENT QUERY
                 if(isset($_GET['deny'])) {
-                    $commentId = $_GET['deny'];
+                    $commentId = escape($_GET['deny']);
 
                     $query = "UPDATE comments SET comment_status = 'Denied' WHERE comment_id = {$commentId}";
                     $denyCommentQuery = mysqli_query($dbConnect, $query);
@@ -82,7 +82,7 @@
 
                 //Delete comment query
                 if(isset($_GET['delete'])) {
-                    $commentId = $_GET['delete'];
+                    $commentId = escape($_GET['delete']);
 
                     $query = "DELETE FROM comments WHERE comment_id = {$commentId} ";
                     $deleteQuery = mysqli_query($dbConnect, $query);

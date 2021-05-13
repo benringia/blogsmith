@@ -5,7 +5,7 @@ if(isset($_POST['checkBoxArray'])) {
     $checkbox = $_POST['checkBoxArray'];
 
     foreach($checkbox as $checkboxPostId) {
-         $bulk_options = $_POST['bulk_options'];
+         $bulk_options = escape($_POST['bulk_options']);
 
          switch($bulk_options) {
             case 'PUBLISHED':
@@ -28,15 +28,15 @@ if(isset($_POST['checkBoxArray'])) {
                 $select_post_query = mysqli_query($dbConnect,$query);
 
                 while($row = mysqli_fetch_array($select_post_query)) {
-                    $postTitle = $row['post_title'];
-                    $postCategoryId = $row['post_category_id'];
-                    $postDate = $row['post_date'];
-                    $postAuthor = $row['post_author'];
-                    $post_user = $row['post_user'];
-                    $postStatus = $row['post_status'];
-                    $postImage = $row['post_image'];
-                    $postTags = $row['post_tags'];
-                    $postContent = $row['post_content'];
+                    $postTitle = escape($row['post_title']);
+                    $postCategoryId = escape($row['post_category_id']);
+                    $postDate = escape($row['post_date']);
+                    $postAuthor = escape($row['post_author']);
+                    $post_user = escape($row['post_user']);
+                    $postStatus = escape($row['post_status']);
+                    $postImage = escape($row['post_image']);
+                    $postTags = escape($row['post_tags']);
+                    $postContent = escape($row['post_content']);
                 }
 
                 $query = "INSERT INTO posts(post_title, post_category_id, post_date, post_user, post_status, post_image, post_tags, post_content) ";

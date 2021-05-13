@@ -18,13 +18,13 @@
         $selectUsers = mysqli_query($dbConnect,$query);
 
         while($row = mysqli_fetch_assoc($selectUsers)) {
-            $userId = $row['user_id'];
-            $userName = $row['username'];
-            $userPassword = $row['user_password'];
-            $userFirstname = $row['user_firstname'];
-            $userLastname = $row['user_lastname'];
-            $userEmail = $row['user_email'];
-            $userImage = $row['user_image'];
+            $userId = escape($row['user_id']);
+            $userName = escape($row['username']);
+            $userPassword = escape($row['user_password']);
+            $userFirstname = escape($row['user_firstname']);
+            $userLastname = escape($row['user_lastname']);
+            $userEmail = escape($row['user_email']);
+            $userImage = escape($row['user_image']);
             $userRole = $row['user_role'];
 
             echo "<tr>";
@@ -66,7 +66,7 @@
 
         <?php 
             if(isset($_GET['admin'])) {
-                $userId = $_GET['admin'];
+                $userId = escape($_GET['admin']);
 
                 $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$userId} ";
                 $changeAdminQuery = mysqli_query($dbConnect, $query);
@@ -76,7 +76,7 @@
 
                 //Change role QUERY
                 if(isset($_GET['subscriber'])) {
-                    $changeSubsQuery = $_GET['subscriber'];
+                    $changeSubsQuery = escape($_GET['subscriber']);
 
                     $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$userId} ";
                     $changeSubsQuery = mysqli_query($dbConnect, $query);
@@ -86,14 +86,16 @@
 
                 //Delete query
                 if(isset($_GET['delete'])) {
-                    if(isset($_SESSION['user_role'])) {
-                        if($_SESSION['user_role'] == 'admin') {
+                    
+                    if(isset($_SESSION['role'])) {
+                        if($_SESSION['role'] == 'admin') {
                             $userId = mysqli_real_escape_string($dbConnect,$_GET['delete']);
 
                             $query = "DELETE FROM users WHERE user_id = {$userId} ";
                             $deleteUserQuery = mysqli_query($dbConnect, $query);
                             header("Location: users.php");
-                        }
+                           
+                        } 
                     }
                    
                 }

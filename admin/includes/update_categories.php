@@ -5,7 +5,7 @@
         <?php //EDIT CATEGORY QUERY
             
             if(isset($_GET['edit'])) {
-                $catId = $_GET['edit'];
+                $catId = escape($_GET['edit']);
                 $query = "SELECT * FROM categories WHERE cat_id = $catId";
                 $selectCategoriesId = mysqli_query($dbConnect, $query);
 
@@ -21,7 +21,7 @@
 
             <?php //UPDATE CATEGORY QUERY
                 if(isset($_POST['update_category'])) {
-                $catTitle = $_POST['cat_title'];
+                $catTitle = escape($_POST['cat_title']);
                 $query = "UPDATE categories SET cat_title = '{$catTitle}' WHERE cat_id = {$catId} ";
 
                 $updateQuery = mysqli_query($dbConnect, $query);

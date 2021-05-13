@@ -1,5 +1,10 @@
 <?php 
 
+function escape($string) {
+    global $dbConnect;
+    return mysqli_real_escape_string($dbConnect, trim($string));
+}
+
 function count_online_users()
 {
  

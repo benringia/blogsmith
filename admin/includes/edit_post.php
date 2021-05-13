@@ -23,12 +23,12 @@
         if(isset($_POST['update_post'])) {
             $post_user = mysqli_real_escape_string($dbConnect,$_POST['post_user']);
             $postTitle  = mysqli_real_escape_string($dbConnect,$_POST['post_title']);
-            $postCategoryId = $_POST['post_category'];
-            $postStatus = $_POST['post_status'];
-            $postImage = $_FILES['image']['name'];
-            $post_image_temp = $_FILES['image']['tmp_name'];
+            $postCategoryId = escape($_POST['post_category']);
+            $postStatus = escape($_POST['post_status']);
+            $postImage = escape($_FILES['image']['name']);
+            $post_image_temp = escape($_FILES['image']['tmp_name']);
             $postContent = mysqli_real_escape_string($dbConnect,$_POST['post_content']);
-            $postTags = $_POST['post_tags'];
+            $postTags = escape($_POST['post_tags']);
             
             move_uploaded_file($post_image_temp, "images/$postImage");
 
