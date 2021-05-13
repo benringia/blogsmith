@@ -39,6 +39,9 @@
                     <li>
                         <a href="registration.php">Register</a>
                     </li>
+                    <li>
+                        <a href="contact.php">Contact</a>
+                    </li>
                     <?php 
                         if(isset($_SESSION['role'])) {
                             if(isset($_GET['p_id'])) {
