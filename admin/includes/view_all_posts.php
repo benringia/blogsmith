@@ -1,6 +1,6 @@
 <?php 
 //CATCH CHECKBOX ARRAY
-
+include('delete_modal.php');
 if(isset($_POST['checkBoxArray'])) {
     $checkbox = $_POST['checkBoxArray'];
 
@@ -149,7 +149,8 @@ if(isset($_POST['checkBoxArray'])) {
                 echo "<td><a href='posts.php?reset={$postId}'>{$postViewCount}</a></td>";
                 echo "<td><a href='../post.php?p_id={$postId}'>View</a></td>";
                 echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Edit</a></td>";
-                echo "<td><a onClick=\"javascript: return confirm('Delete Item?'); \" href='posts.php?delete={$postId}'>Delete</a></td>";
+                echo "<td><a rel='$postId' href='javascript:void(0)' class='delete-link' >Delete</a></td>";
+                // echo "<td><a onClick=\"javascript: return confirm('Delete Item?'); \" href='posts.php?delete={$postId}'>Delete</a></td>";
                 echo "</tr>";
             }
             
@@ -180,3 +181,15 @@ if(isset($_POST['checkBoxArray'])) {
         </tbody>
     </table>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $(".delete-link").on('click', function() {
+            let id = $(this).attr("rel");
+            let deleteUrl = "posts.php?delete=" + id + " ";
+
+            $(".modal-delete-link").attr("href",deleteUrl);
+            $("#myModal").modal('show');
+        })
+    })
+</script>
