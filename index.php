@@ -12,113 +12,193 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
             <?php
-                $posts_to_display = 5;        
-                $published_posts_count = ceil($published_posts_count / $posts_to_display);
-                
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                    $page_start = $posts_to_display * ($page - 1);
-                } else {
-                    $page_start = 0;
-                }
-                                
-            ?>
-            
-                <h1 class="page-header">
-                        User Posts
-                        <small></small>
-                    </h1>
-                <?php 
-                    //POST COUNT QUERY
-                    $count_post_query = "SELECT * FROM posts ";
-                    $post_count_result = mysqli_query($dbConnect, $count_post_query);
-                    $count_result = mysqli_num_rows($post_count_result);
-                    
-                    $count_result = ceil($count_result / 5);
 
-                    //POST DISPLAYED QUERY
-                    $query = "SELECT * FROM posts WHERE post_status='PUBLISHED' LIMIT $page_start, $posts_to_display";
+      
 
-                    $allPostsQuery = mysqli_query($dbConnect, $query);
-
-                    while($row = mysqli_fetch_assoc($allPostsQuery)) {
-                        $postId =  $row['post_id'];
-                        $postTitle =  $row['post_title'];
-                        $postAuthor =  $row['post_user'];
-                        $postDate =  $row['post_date'];
-                        $postImage =  $row['post_image'];
-                        $postContent =  substr($row['post_content'],0,100); //for doing excerp
-                        $postStatus = $row['post_status'];
-
-                         if($postStatus == 'PUBLISHED') {
-                           
-
-                         
-                       ?>
-
-                
-
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="post.php?p_id=<?php echo $postId;?>"><?php echo $postTitle ?></a>
-                </h2>
-                    <p class="lead">
-                        by <a href="author_post.php?author=<?php echo $postAuthor?>&p_id=<?php echo $postId;?>"><?php echo $postAuthor ?></a>
-                    </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on <i><?php echo $postDate ?></i></p>
-                    <hr>
-                    <a href="post.php?p_id=<?php echo $postId;?>"><img class="img-responsive" src="admin/images/<?php echo $postImage?>" alt=""></a>
-                    
-                    <hr>
-                    <p><?php echo $postContent ?></p>
-                    <a class="btn btn-primary" href="post.php?p_id=<?php echo $postId;?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                <hr>
-                <?php } }?>
+$per_page = 10;
 
 
-    
-               
+if(isset($_GET['page'])) {
 
-                <!-- Pager -->
-              
-                <ul class="pager">
-                    <!-- <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li> -->
-                    <?php
 
-                if($page != 1){
-                    $prev_page = $page - 1;
-                    echo "<li><a href='index.php?page={$prev_page}'>PREV</a></li>";
-                }
-                
-                for($i = 1; $i <= $count ; $i++){
-                    if($i == $page || ($i == 1 && $page == 1)){
-                    echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
-                    } else {
-                        echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
-                    }
-                }
+$page = $_GET['page'];
 
-                if($page != $count){
-                    $next_page = $page + 1;
-                    echo "<li><a href='index.php?page={$next_page}'>NEXT</a></li>";
-                    }
-            ?>
-                </ul>
+} else {
+
+
+   $page = "";
+}
+
+
+if($page == "" || $page == 1) {
+
+   $page_1 = 0;
+
+} else {
+
+   $page_1 = ($page * $per_page) - $per_page;
+
+}
+
+
+if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin' ) {
+
+
+$post_query_count = "SELECT * FROM posts";
+
+
+} else {
+
+$post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
+
+}   
+
+$find_count = mysqli_query($dbConnect,$post_query_count);
+$count = mysqli_num_rows($find_count);
+
+if($count < 1) {
+
+
+echo "<h1 class='text-center'>No posts available</h1>";
+
+
+
+
+} else {
+
+
+$count  = ceil($count /$per_page);
+
+
+
+   
+$query = "SELECT * FROM posts LIMIT $page_1, $per_page";
+$select_all_posts_query = mysqli_query($dbConnect,$query);
+
+while($row = mysqli_fetch_assoc($select_all_posts_query)) {
+$post_id = $row['post_id'];
+$post_title = $row['post_title'];
+$post_author = $row['post_user'];
+$post_date = $row['post_date'];
+$post_image = $row['post_image'];
+$post_content = substr($row['post_content'],0,400);
+$post_status = $row['post_status'];
+
+
+
+?>
+
+
+
+   <!-- First Blog Post -->
+
+ 
+
+   <h2>
+       <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
+   </h2>
+   <p class="lead">
+       by <a href="author_posts.php?author=<?php echo $post_author ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author ?></a>
+   </p>
+   <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
+   <hr>
+   
+   
+   <a href="post.php?p_id=<?php echo $post_id; ?>">
+   <img class="img-responsive" src="admin/images/<?php echo $post_image;?>" alt="">
+   </a>
+   
+   
+   
+   <hr>
+   <p><?php echo $post_content ?></p>
+   <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+   <hr>
+   
+
+<?php }  } ?>
+
+   
+   
+   
+   
+   
+
+ 
+
+
+</div>
+
+ 
+
+<!-- Blog Sidebar Widgets Column -->
+
+
+<?php include "includes/sidebar.php";?>
+
+
+</div>
+<!-- /.row -->
+
+<hr>
+
+
+<ul class="pager">
+
+<?php 
+
+$number_list = array();
+
+
+for($i =1; $i <= $count; $i++) {
+
+
+if($i == $page) {
+
+echo "<li '><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
+
+
+}  else {
+
+echo "<li '><a href='index.php?page={$i}'>{$i}</a></li>";
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+?>
+
+
+
+
+
+</ul>
 
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
-            <?php include 'includes/sidebar.php';?>
+            <?php //include 'includes/sidebar.php';?>
 
         </div>
         <!-- /.row -->
 
         <hr>
-        <?php include 'includes/footer.php';?>
+        <?php //include 'includes/footer.php';?>
         
