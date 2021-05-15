@@ -133,21 +133,12 @@
                 <!-- /.row -->
 
                 <?php 
-                 $query = "SELECT * FROM posts WHERE post_status = 'PUBLISHED'";
-                 $selectAllPublishedPost = mysqli_query($dbConnect, $query);
-                 $postPublishedCount = mysqli_num_rows($selectAllPublishedPost); 
+                    
+                    $postPublishedCount = changeStatus('posts', 'post_status', 'PUBLISHED');
+                    $postDraftCount = changeStatus('posts', 'post_status', 'DRAFT'); 
+                    $deniedCommentCount = changeStatus('comments', 'comment_status', 'Denied');
+                    $subscriberCount = checkRole('users', 'user_role', 'subscriber');
 
-                  $query = "SELECT * FROM posts WHERE post_status = 'DRAFT'";
-                  $selectAllDraftPost = mysqli_query($dbConnect, $query);
-                  $postDraftCount = mysqli_num_rows($selectAllDraftPost); 
-                  
-                  $query = "SELECT * FROM comments WHERE comment_status = 'Denied'";
-                  $selectDeniedComments = mysqli_query($dbConnect, $query);
-                  $deniedCommentCount = mysqli_num_rows($selectDeniedComments); 
-
-                  $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
-                  $selectSubscribers = mysqli_query($dbConnect, $query);
-                  $subscriberCount = mysqli_num_rows($selectSubscribers);
                 ?>
 
                 <div class="row">

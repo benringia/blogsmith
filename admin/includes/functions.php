@@ -123,7 +123,20 @@ function count_online_users()
         return  mysqli_num_rows($selectAllPost);
     }
 
-    
+   
+    function changeStatus($table, $column, $status) {
+        global $dbConnect;
+        $query = "SELECT * FROM $table WHERE $column = '$status' ";
+        $result = mysqli_query($dbConnect, $query);
+        return mysqli_num_rows($result); 
+    }
+
+    function checkRole($table, $column, $role) {
+        global $dbConnect;
+        $query = "SELECT * FROM $table WHERE $column = '$role' ";
+        $result = mysqli_query($dbConnect, $query);
+        return mysqli_num_rows($result);
+    }
 
 
 ?>
