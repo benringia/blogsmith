@@ -15,10 +15,16 @@
 
                 if(isset($_GET['category'])) {
                     $postCategoryId = $_GET['category'];
-                }
-                    $query = "SELECT * FROM posts WHERE post_category_id = $postCategoryId ";
+                
+                    $query = "SELECT * FROM posts WHERE post_category_id = $postCategoryId AND post_status = 'published' ";
 
                     $allPostsQuery = mysqli_query($dbConnect, $query);
+
+                    if(mysqli_num_rows($allPostsQuery) < 1) {
+                        echo "<h1 class='text-center'>No Categories available</h1>";
+                    } else {
+                        
+                    
 
                     while($row = mysqli_fetch_assoc($allPostsQuery)) {
                         $postId =  $row['post_id'];
@@ -50,7 +56,9 @@
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php } ?>
+                <?php } } } else {
+                    header("Locations: index.php");
+                }?>
 
 
     

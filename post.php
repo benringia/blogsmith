@@ -22,11 +22,20 @@
                         if(!$send_query) {
                             die("ERROR : " . mysqli_error($dbConnect));
                         }
-                    
+                        
+                        if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                            $query = "SELECT * FROM posts WHERE post_id = $postId ";
+                        } else {
+                            $query = "SELECT * FROM posts WHERE post_id = $postId AND post_status = 'published' ";
+                        }
 
-                        $query = "SELECT * FROM posts WHERE post_id = $postId ";
+                        
 
                         $allPostsQuery = mysqli_query($dbConnect, $query);
+                        if(mysqli_num_rows($allPostsQuery) < 1) {
+                            echo "<h1 class='text-center'>No Categories available</h1>";
+                        } else {
+                            
 
                         while($row = mysqli_fetch_assoc($allPostsQuery)) {
                         $postTitle =  $row['post_title'];
@@ -38,8 +47,7 @@
                         ?>
 
                 <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
+                    Posts
                 </h1>
 
                 <!-- First Blog Post -->
@@ -56,9 +64,7 @@
                     <p><?php echo $postContent ?></p>
 
                 <hr>
-                <?php } } else {
-                        header("Location: index.php"); 
-                     } 
+                <?php } 
                     ?>
 
                 <?php
@@ -129,7 +135,9 @@
                         </div>
                     </div>
                         
-                   <?php } ?>
+                   <?php } } } else {
+                        header("Location: index.php"); 
+                     } ?>
               
 
 
