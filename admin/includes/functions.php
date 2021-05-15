@@ -138,5 +138,19 @@ function count_online_users()
         return mysqli_num_rows($result);
     }
 
+    function is_admin($username = '') {
+        global $dbConnect;
+        $query = "SELECT user_role FROM users WHERE username = '$username' ";
+        $res = mysqli_query($dbConnect,$query);
+        checkQuery($res);
+
+        $row = mysqli_fetch_array($res);
+        if($row['user_role'] == 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+
+    };
 
 ?>
