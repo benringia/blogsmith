@@ -4,17 +4,16 @@
 
 <?php 
     if(isset($_POST['submit'])) {
-        $username = $_POST['username'];
-        $email    = $_POST['email'];
-        $password = $_POST['password'];
+        $username = escape($_POST['username']);
+        $email    = escape($_POST['email']);
+        $password = escape($_POST['password']);
 
-        if(!empty($username) && !empty($email) && !empty($password )) {
-            // $query = "SELECT randSalt FROM users ";
-            // $select_random_salt = send_query($dbConnect,$query);
-    
-            // $row = mysqli_fetch_array($select_random_salt); 
-            // $salt = $row['randSalt'];
-            // $password = crypt($password, $salt);
+        if(username_check($username)) {
+            $message = 'User already exist';
+        }
+
+         if(!empty($username) && !empty($email) && !empty($password )) {
+            
             
             $username = mysqli_real_escape_string($dbConnect, $username);
             $email    = mysqli_real_escape_string($dbConnect, $email);
@@ -29,7 +28,7 @@
             if(! $register_new_user) {
                 die("ERROR: " . mysqli_error($dbConnect) );
             }
-            $message = "<h6 class='text-center success-popup'>Registration Successful!</h6>";
+            // $message = "<h6 class='text-center success-popup'>Registration Successful!</h6>";
         } else {
             $message = "<h6 class='text-center danger-popup'>Fields cannot be empty</h6>";
         }

@@ -138,7 +138,7 @@ function count_online_users()
         return mysqli_num_rows($result);
     }
 
-    function is_admin($username = '') {
+    function is_admin($username) {
         global $dbConnect;
         $query = "SELECT user_role FROM users WHERE username = '$username' ";
         $res = mysqli_query($dbConnect,$query);
@@ -153,4 +153,4 @@ function count_online_users()
 
     };
 
-?>
+
