@@ -115,6 +115,14 @@ function count_online_users()
         } 
     }
 
+
+    function recordCount($table) {
+        global $dbConnect;
+        $query = "SELECT * FROM " . $table;
+        $selectAllPost = mysqli_query($dbConnect, $query);
+        return  mysqli_num_rows($selectAllPost);
+    }
+
     
 
 
