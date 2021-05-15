@@ -90,8 +90,15 @@ if(isset($_POST['checkBoxArray'])) {
         <tbody>
             <?php 
             
-            $query = "SELECT * FROM posts ORDER BY post_id DESC ";
+            // $query = "SELECT * FROM posts ORDER BY post_id DESC ";
+            $query =  "SELECT posts.post_id, posts.post_author, posts.post_user, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, ";
+            $query .= "posts.post_tags, posts.post_comment_count, posts.post_date, posts.post_view_count, categories.cat_id, categories.cat_title ";
+            $query .= "FROM posts ";
+            $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id ORDER BY posts.post_id DESC ";
+
+
             $selectPosts = mysqli_query($dbConnect,$query);
+            checkQuery($selectPosts);
 
             while($row = mysqli_fetch_assoc($selectPosts)) {
                 $postId = $row['post_id'];
@@ -105,6 +112,8 @@ if(isset($_POST['checkBoxArray'])) {
                 $postComments = $row['post_comment_count'];
                 $postCategoryId = $row['post_category_id'];
                 $postViewCount = $row['post_view_count'];
+                $category_title = $row['cat_title'];
+                $category_id = $row['cat_id'];
 
                 echo "<tr>";
                 ?>
@@ -121,16 +130,7 @@ if(isset($_POST['checkBoxArray'])) {
                 }
                 
                 echo "<td>{$postTitle}</td>";
-
-                $query = "SELECT * FROM categories WHERE cat_id = $postCategoryId";
-                $selectCategoriesId = mysqli_query($dbConnect, $query);
-
-                while($row = mysqli_fetch_assoc($selectCategoriesId)) {
-                    $catId =  $row['cat_id'];
-                    $catTitle =  $row['cat_title'];
-                }
-
-                echo "<td>{$catTitle}</td>";
+                echo "<td>{$category_title}</td>";
                 echo "<td>{$postStatus}</td>";
                 echo "<td><img width='80' src='images/{$postImage}'></td>";
                 echo "<td>{$postTags}</td>";
