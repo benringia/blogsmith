@@ -4,7 +4,7 @@
 
 
 <?php 
-    if(isset($_POST['submit'])) {
+    if($_SERVER['REQUEST_METHOD'] == "POST") {
         $username = trim(escape($_POST['username']));
         $email    = trim(escape($_POST['email']));
         $password = trim(escape($_POST['password']));
@@ -32,13 +32,22 @@
         //PASSWORD VALIDATION
         
         $password =='' ?  $err['password'] = 'Password cannot be empty' : '';
+        
+        strlen($password) < 5 && !empty($password) ? $err['password'] = 'Password must be atleast 5 characters' : '';
 
         foreach($err as $key => $value) {
             if(empty($value)) {
-                // register_user($username, $email, $password);
-
+                
+                unset($err[$key]);
                 // login_user($username, $password);
             }
+        } //foreach
+
+        if(empty($err)) {
+
+            register_user($username, $email, $password);
+
+            login_user($username,$password);
         }
 
     } 

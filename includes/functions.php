@@ -45,33 +45,22 @@ function email_check($email) {
 function register_user($username, $email, $password) {
     global $dbConnect;
 
-    $username = escape($_POST['username']);
-    $email    = escape($_POST['email']);
-    $password = escape($_POST['password']);
+    $username = mysqli_real_escape_string($dbConnect, $username);
+    $email    = mysqli_real_escape_string($dbConnect, $email);
+    $password = mysqli_real_escape_string($dbConnect, $password);
 
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-    if(username_check($username)) {
-        
+    $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+    $query .= "VALUES('$username','$email','$password','subscriber' )";
+    $register_new_user = send_query($dbConnect,$query);
+
+    if(! $register_new_user) {
+        die("ERROR: " . mysqli_error($dbConnect) );
     }
+}
 
-     if(!empty($username) && !empty($email) && !empty($password )) {
-        
-        
-        $username = mysqli_real_escape_string($dbConnect, $username);
-        $email    = mysqli_real_escape_string($dbConnect, $email);
-        $password = mysqli_real_escape_string($dbConnect, $password);
 
-        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-
-        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
-        $query .= "VALUES('$username','$email','$password','subscriber' )";
-        $register_new_user = send_query($dbConnect,$query);
-
-        if(! $register_new_user) {
-            die("ERROR: " . mysqli_error($dbConnect) );
-        }
-        
-    } 
 
     function login_user($username,$password) {
         global $dbConnect;
@@ -105,11 +94,11 @@ function register_user($username, $email, $password) {
             $_SESSION['lastname'] = $db_lastname;
             $_SESSION['role'] = $db_userRole;
 
-            header("Location: ../admin");
+            header("Location: /blogsmith/admin");
             
          } else  {
             header("Location: ../index.php");
          }
     }
-}
+
 
