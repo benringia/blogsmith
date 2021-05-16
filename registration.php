@@ -18,20 +18,20 @@
         //     $err['username'] = 'Username must be atleast 5 characters';
         // }
         //USERNAME VALIDATIONS
-        strlen($username) < 4 ? : $err['username'] = 'Username must be atleast 5 characters';
+        strlen($username) < 5 ? $err['username'] = 'Username must be atleast 5 characters' : '';
         
-        $username =='' ? : $err['username'] = 'Username cannot be empty';
+        $username =='' ?  $err['username'] = 'Username cannot be empty' : '';
        
-        username_check($username) ? : $err['username'] = 'Username already exist';
+        username_check($username) ?  $err['username'] = 'Username already exist' : '';
 
         //EMAIL VALIDATIONS
-        $email =='' ? : $err['email'] = 'Email cannot be empty';
+        $email =='' ?  $err['email'] = 'Email cannot be empty' : '';
        
-        email_check($email) ? : $err['email'] = 'Email already exist, <a href="index.php">Login?</a>';
+        email_check($email) ?  $err['email'] = 'Email already exist, <a href="index.php">Login?</a>': '' ;
 
         //PASSWORD VALIDATION
         
-        $password =='' ? : $err['password'] = 'Password cannot be empty';
+        $password =='' ?  $err['password'] = 'Password cannot be empty' : '';
 
         foreach($err as $key => $value) {
             if(empty($value)) {
@@ -64,14 +64,17 @@
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username" autocomplete="on" value="<?php echo isset($username) ? $username : ''?>">
+                            <p class="text-danger"><?php echo isset($err['username']) ? $err['username'] : ''?></p>
                         </div>
                          <div class="form-group">
                             <label for="email" class="sr-only">Email</label>
                             <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com" autocomplete="on" value="<?php echo isset($email) ? $email : ''?>">
+                            <p class="text-danger"><?php echo isset($err['email']) ? $err['email'] : ''?></p>
                         </div>
                          <div class="form-group">
                             <label for="password" class="sr-only">Password</label>
                             <input type="password" name="password" id="key" class="form-control" placeholder="Password">
+                            <p class="text-danger"><?php echo isset($err['password']) ? $err['password'] : ''?></p>
                         </div>
                 
                         <input type="submit" name="submit" id="btn-login" class="btn btn-info btn-lg btn-block" value="Register">
