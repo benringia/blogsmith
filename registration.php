@@ -1,43 +1,47 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
+ <?php session_start(); ?>
 
 
 <?php 
     if(isset($_POST['submit'])) {
-        $username = escape($_POST['username']);
-        $email    = escape($_POST['email']);
-        $password = escape($_POST['password']);
+        $username = trim(escape($_POST['username']));
+        $email    = trim(escape($_POST['email']));
+        $password = trim(escape($_POST['password']));
 
-        if(username_check($username)) {
-            $message = 'User already exist';
-        }
-
-         if(!empty($username) && !empty($email) && !empty($password )) {
-            
-            
-            $username = mysqli_real_escape_string($dbConnect, $username);
-            $email    = mysqli_real_escape_string($dbConnect, $email);
-            $password = mysqli_real_escape_string($dbConnect, $password);
-    
-            $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-    
-            $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
-            $query .= "VALUES('$username','$email','$password','subscriber' )";
-            $register_new_user = send_query($dbConnect,$query);
-    
-            if(! $register_new_user) {
-                die("ERROR: " . mysqli_error($dbConnect) );
-            }
-            // $message = "<h6 class='text-center success-popup'>Registration Successful!</h6>";
-        } else {
-            $message = "<h6 class='text-center danger-popup'>Fields cannot be empty</h6>";
-        }
-
+        $err = [
+            'username' => '',
+            'email' => '',
+            'password' => ''
+        ];
+        // if(strlen($username) < 5) {
+        //     $err['username'] = 'Username must be atleast 5 characters';
+        // }
+        //USERNAME VALIDATIONS
+        strlen($username) < 4 ? : $err['username'] = 'Username must be atleast 5 characters';
+        
+        $username =='' ? : $err['username'] = 'Username cannot be empty';
        
-    } else {
-        $message='';
-    }
+        username_check($username) ? : $err['username'] = 'Username already exist';
 
+        //EMAIL VALIDATIONS
+        $email =='' ? : $err['email'] = 'Email cannot be empty';
+       
+        email_check($email) ? : $err['email'] = 'Email already exist, <a href="index.php">Login?</a>';
+
+        //PASSWORD VALIDATION
+        
+        $password =='' ? : $err['password'] = 'Password cannot be empty';
+
+        foreach($err as $key => $value) {
+            if(empty($value)) {
+                // register_user($username, $email, $password);
+
+                // login_user($username, $password);
+            }
+        }
+
+    } 
 ?>
 
     <!-- Navigation -->
@@ -55,7 +59,7 @@
                 <div class="form-wrap">
                 <h1 style="margin-bottom: 30px">Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                        <?php echo $message?>
+                        
                         
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
