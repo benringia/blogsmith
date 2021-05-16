@@ -51,9 +51,9 @@
                 echo "<td><a href='../post.php?p_id=$postId'>$postTitle</a></td>";
             }
             echo "<td>{$commentDate}</td>";
-            echo "<td><a href='comments.php?approve={$commentId}'>Approve</a></td>";
-            echo "<td><a href='comments.php?deny={$commentId}'>Deny</a></td>";
-            echo "<td><a href='comments.php?delete={$commentId}'>Delete</a></td>";
+            echo "<td class='text-center'><a class='btn btn-success' href='comments.php?approve={$commentId}'><i class='fa fa-check'></i>Approve</a></td>";
+            echo "<td class='text-center'><a class='btn btn-danger' href='comments.php?deny={$commentId}'><i class='fa fa-thumbs-down'></i>&nbsp;Deny</a></td>";
+            echo "<td class='text-center'><a class='btn btn-danger' href='comments.php?delete={$commentId}'><i class='fa fa-trash'></i>&nbsp;Delete</a></td>";
             echo "</tr>";
         }
         

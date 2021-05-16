@@ -16,8 +16,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome to Admin Page
-                        <small>Author</small>
+                        Welcome to Users Page,
+                        <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>!
                     </h1>
 
                     <?php 

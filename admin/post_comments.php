@@ -70,9 +70,9 @@
                     echo "<td><a href='../post.php?p_id=$postId'>$postTitle</a></td>";
                 }
                 echo "<td>{$commentDate}</td>";
-                echo "<td><a href='post_comments.php?approve={$commentId}&id=". $_GET['id'] ."'>Approve</a></td>";
-                echo "<td><a href='post_comments.php?deny={$commentId}&id=". $_GET['id'] ."'>Deny</a></td>";
-                echo "<td><a href='post_comments.php?delete={$commentId}'>Delete</a></td>";
+                echo "<td><a class='btn btn-success' href='post_comments.php?approve={$commentId}&id=". $_GET['id'] ."'>Approve</a></td>";
+                echo "<td><a class='btn btn-danger' href='post_comments.php?deny={$commentId}&id=". $_GET['id'] ."'>Deny</a></td>";
+                echo "<td><a class='btn btn-danger' href='post_comments.php?delete={$commentId}'>Delete</a></td>";
                 echo "</tr>";
             }
             

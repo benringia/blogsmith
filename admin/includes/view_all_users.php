@@ -54,10 +54,10 @@
             //     echo "<td><a href='../post.php?p_id=$postId'>$postTitle</a></td>";
             // }
             
-            echo "<td><a href='users.php?admin={$userId}'>admin</a></td>";
-            echo "<td><a href='users.php?subscriber={$userId}'>subscriber</a></td>";
-            echo "<td><a href='users.php?source=edit_user&edit_user={$userId}'>Edit</a></td>";
-            echo "<td><a href='users.php?delete={$userId}'>Delete</a></td>";
+            echo "<td class='text-center'><a class='btn btn-success' href='users.php?admin={$userId}'><i class='fa fa-user'></i>&nbsp;Admin</a></td>";
+            echo "<td class='text-center'><a class='btn btn-primary' href='users.php?subscriber={$userId}'>Subscriber</a></td>";
+            echo "<td class='text-center'><a class='btn btn-info' href='users.php?source=edit_user&edit_user={$userId}'><i class='fa fa-pencil'></i>&nbsp;Edit</a></td>";
+            echo "<td class='text-center'><a class='btn btn-danger' href='users.php?delete={$userId}'><i class='fa fa-trash'></i>&nbsp;Delete</a></td>";
             echo "</tr>";
         }
         

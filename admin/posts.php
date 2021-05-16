@@ -1,5 +1,4 @@
 <?php include "includes/admin_header.php" ?>
-
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -13,8 +12,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome to Admin Page
-                        <small>Author</small>
+                        Welcome to All Posts,
+                        <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>!
                     </h1>
 
                     <?php 
