@@ -78,6 +78,7 @@ function count_online_users()
                     die('Error : ' . mysqli_error($dbConnect));
                 }
             }
+            $stmt->close();
         }
       
     }

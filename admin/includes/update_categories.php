@@ -32,7 +32,8 @@
                 if(!$stmt) {
                     die("ERROR : " . mysqli_error($dbConnect));
                 }
-                
+
+                $stmt->close();
                 redirect("categories.php");
             }
             ?>

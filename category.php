@@ -49,7 +49,7 @@
                         $stmt2 -> bind_result($postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
 
                         $stmt2->store_result();
-                        
+
                         $stmt = $stmt2;
                     }
 
@@ -84,7 +84,7 @@
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php } } else {
+                <?php } $stmt->close(); } else {
                     header("Locations: index.php");
                 }?>
 
