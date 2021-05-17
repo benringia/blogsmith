@@ -93,8 +93,9 @@ function count_online_users()
            echo "<tr>";
            echo "<td>{$catId}</td>";
            echo "<td>{$catTitle}</td>";
-           echo "<td><a href='categories.php?delete={$catId}'>Delete</a></td>";
-           echo "<td><a href='categories.php?edit={$catId}'>Edit</a></td>";
+           echo "<td class='text-center'><a class='btn btn-success' href='categories.php?edit={$catId}'><i class='fa fa-pencil'></i>&nbsp;Edit</a></td>";
+           echo "<td class='text-center'><a class='btn btn-danger' href='categories.php?delete={$catId}'><i class='fa fa-trash'></i>&nbsp;Delete</a></td>";
+          
            echo "</tr>";
        }
     }

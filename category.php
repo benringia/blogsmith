@@ -15,24 +15,51 @@
 
                 if(isset($_GET['category'])) {
                     $postCategoryId = $_GET['category'];
-                
-                    $query = "SELECT * FROM posts WHERE post_category_id = $postCategoryId AND post_status = 'published' ";
 
-                    $allPostsQuery = mysqli_query($dbConnect, $query);
+                    if(isset($_SESSION['username']) && is_admin($_SESSION['username'])){
 
-                    if(mysqli_num_rows($allPostsQuery) < 1) {
-                        echo "<h1 class='text-center'>No Categories available</h1>";
+                        $stmt1 = mysqli_prepare($dbConnect, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
+                        checkQuery($stmt1);
                     } else {
-                        
+
+                        $stmt2 = mysqli_prepare($dbConnect, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ");
+                        checkQuery($stmt2);
+                        $published = 'published';
+                    }
+                
+                    
+                    if(isset($stmt1)) {
+
+                        mysqli_stmt_bind_param($stmt1, "i", $postCategoryId);
+
+                        mysqli_stmt_execute($stmt1);
+
+                        mysqli_stmt_bind_result($stmt1, $postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
+
+                        $stmt1->store_result();
+
+                        $stmt = $stmt1;
+
+                    } else {
+
+                        mysqli_stmt_bind_param($stmt2, "is", $postCategoryId, $published);
+
+                        mysqli_stmt_execute($stmt2);
+
+                        mysqli_stmt_bind_result($stmt2, $postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
+
+                        $stmt2->store_result();
+                        $stmt = $stmt2;
+                    }
+
+                    
+                    if(mysqli_stmt_num_rows($stmt) === 0) {
+                        echo "<h1 class='text-center'>No Categories available</h1>";
+                    } 
                     
 
-                    while($row = mysqli_fetch_assoc($allPostsQuery)) {
-                        $postId =  $row['post_id'];
-                        $postTitle =  $row['post_title'];
-                       $postAuthor =  $row['post_author'];
-                       $postDate =  $row['post_date'];
-                       $postImage =  $row['post_image'];
-                       $postContent =  $postContent =  substr($row['post_content'],0,100); //for doing excerp
+                    while(mysqli_stmt_fetch($stmt)){
+                       
 
                        ?>
 
@@ -56,7 +83,7 @@
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-                <?php } } } else {
+                <?php } } else {
                     header("Locations: index.php");
                 }?>
 
