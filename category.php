@@ -18,11 +18,11 @@
 
                     if(isset($_SESSION['username']) && is_admin($_SESSION['username'])){
 
-                        $stmt1 = mysqli_prepare($dbConnect, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
+                        $stmt1 = $dbConnect -> prepare("SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
                        
                     } else {
 
-                        $stmt2 = mysqli_prepare($dbConnect, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ");
+                        $stmt2 = $dbConnect -> prepare("SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ");
                         
                         $published = 'published';
                     }
@@ -30,11 +30,11 @@
                     
                     if(isset($stmt1)) {
 
-                        mysqli_stmt_bind_param($stmt1, "i", $postCategoryId);
+                        $stmt1 -> bind_param("i", $postCategoryId);
 
-                        mysqli_stmt_execute($stmt1);
+                        $stmt1 -> execute();
 
-                        mysqli_stmt_bind_result($stmt1, $postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
+                        $stmt1 -> bind_result($postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
 
                         $stmt1->store_result();
 
@@ -42,13 +42,14 @@
 
                     } else {
 
-                        mysqli_stmt_bind_param($stmt2, "is", $postCategoryId, $published);
+                        $stmt2 -> bind_param( "is", $postCategoryId, $published);
 
-                        mysqli_stmt_execute($stmt2);
-
-                        mysqli_stmt_bind_result($stmt2, $postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
+                        $stmt2->execute();
+                        
+                        $stmt2 -> bind_result($postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
 
                         $stmt2->store_result();
+                        
                         $stmt = $stmt2;
                     }
 
@@ -58,7 +59,7 @@
                     } 
                     
 
-                    while(mysqli_stmt_fetch($stmt)){
+                    while($stmt->fetch()){
                        
 
                        ?>
