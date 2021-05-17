@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <?php if(session_status() === PHP_SESSION_NONE) session_start(); ?>
-<?php include_once 'admin/functions.php';?>
-<?php include 'functions.php';?>
+<?php require_once 'admin/includes/functions.php';?>
+<?php require_once 'includes/functions.php';?>
 <!DOCTYPE html>
 <html lang="en">
 

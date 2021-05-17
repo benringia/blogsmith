@@ -19,11 +19,11 @@
                     if(isset($_SESSION['username']) && is_admin($_SESSION['username'])){
 
                         $stmt1 = mysqli_prepare($dbConnect, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
-                        checkQuery($stmt1);
+                       
                     } else {
 
                         $stmt2 = mysqli_prepare($dbConnect, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ");
-                        checkQuery($stmt2);
+                        
                         $published = 'published';
                     }
                 

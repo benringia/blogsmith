@@ -1,15 +1,15 @@
 <?php 
      
-     function send_query($database_connection,$database_query) {
-         global $dbConnect;
-        return mysqli_query($database_connection,$database_query);
-    };
+//      function send_query($database_connection,$database_query) {
+//          global $dbConnect;
+//         return mysqli_query($database_connection,$database_query);
+//     };
 
  
-function escape($string) {
-    global $dbConnect;
-    return mysqli_real_escape_string($dbConnect, trim($string));
-}
+// function escape($string) {
+//     global $dbConnect;
+//     return mysqli_real_escape_string($dbConnect, trim($string));
+// }
 
 
 function username_check($username) {
