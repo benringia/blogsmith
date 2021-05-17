@@ -19,7 +19,6 @@ function count_online_users()
  
         if (!$dbConnect) {
  
-            // include '../includes/db.php';
             require_once('../../includes/db.php');
         }
         $session = session_id();
@@ -67,10 +66,15 @@ function count_online_users()
             if($catTitle == "" || empty($catTitle)) {
                 echo " Empty";
             } else {
-                $query = "INSERT INTO categories(cat_title) VALUE ('{$catTitle}') ";
-                $createCategoryQuery = mysqli_query($dbConnect, $query);
 
-                if(!$createCategoryQuery) {
+
+                $stmt = $dbConnect -> prepare("INSERT INTO categories(cat_title) VALUES(?) ");
+                
+                $stmt -> bind_param('s', $catTitle);
+
+                $stmt -> execute();
+
+                if(!$stmt) {
                     die('Error : ' . mysqli_error($dbConnect));
                 }
             }

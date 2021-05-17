@@ -22,12 +22,18 @@
             <?php //UPDATE CATEGORY QUERY
                 if(isset($_POST['update_category'])) {
                 $catTitle = escape($_POST['cat_title']);
-                $query = "UPDATE categories SET cat_title = '{$catTitle}' WHERE cat_id = {$catId} ";
 
-                $updateQuery = mysqli_query($dbConnect, $query);
-                if(!$updateQuery) {
+                $stmt = mysqli_prepare($dbConnect, "UPDATE categories SET cat_title = ? WHERE cat_id = ?");
+
+                $stmt -> bind_param("si", $catTitle, $catId);
+
+                $stmt -> execute();
+
+                if(!$stmt) {
                     die("ERROR : " . mysqli_error($dbConnect));
                 }
+                
+                redirect("categories.php");
             }
             ?>
         
