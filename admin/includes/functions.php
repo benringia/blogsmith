@@ -8,11 +8,23 @@ function redirect($location) {
 function ifItIsMethod($method=null) {
    
     return true ? $_SERVER['REQUEST_METHOD'] == strtoupper($method) : false;
+
+    // if($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
+    //     return true;
+    // }
+    // return false;
+    
 }
 
 function isLoggedIn() {
    
-    return true ? isset($_SESSION['user_role']) : false;
+    return true ? isset($_SESSION['role']) : false;
+
+    // if(isset($_SESSION['role'])) {
+    //     return true;
+    // }
+    // return false;
+   
 }
 
 function checkIfUserIsLoggedInAndRedirect($redirectLocation = null) {
