@@ -1,18 +1,18 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
+ <?php session_start()?>
 
  <?php 
-    //  checkIfUserIsLoggedInAndRedirect('admin');
+     checkIfUserIsLoggedInAndRedirect('/blogsmith/admin');
 
      if(ifItIsMethod('post')) {
        if(isset($_POST['username']) && isset($_POST['password'])) {
 
-        login_user(
-            isset($_POST['username']), 
-            isset($_POST['password'])
-          );
+        login_user($_POST['username'], $_POST['password']);
 
-       } 
+       } else {
+         redirect('/blogsmith/login.php');
+       }
      }
 
  ?>

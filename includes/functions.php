@@ -97,7 +97,7 @@ function register_user($username, $email, $password) {
             header("Location: /blogsmith/admin");
             
          } else  {
-            header("Location: ../index.php");
+            header("Location: /blogsmith/login.php");
          }
     }
 
