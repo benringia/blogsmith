@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 17, 2021 at 12:09 PM
+-- Generation Time: May 19, 2021 at 02:07 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -39,7 +39,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 (6, 'PHP'),
 (7, 'Java'),
-(17, 'Category');
+(17, 'Category'),
+(21, 'New');
 
 -- --------------------------------------------------------
 
@@ -132,7 +133,8 @@ INSERT INTO `users` (`user_id`, `username`, `user_password`, `user_firstname`, `
 (23, 'ben', '$2y$10$iQQf3B4Akvxz.JNuoPdVGeTPlufPwHh6uPJmKHah43G.1PMmZGspW', 'benfirst', 'benlast', 'ben@gmaii.com', NULL, 'admin', '$2y$10$VY3LJhnKS9iF9bSzN9qAWA'),
 (28, 'newguy', '$2y$10$W0087udZ.UCvm74tvC.RNOcJKZeEYGdsFo6EbRzquLwWGFZDSdYjS', 'New', 'Guy', 'newguy@gmail.com', NULL, 'admin', '$2y$10$VY3LJhnKS9iF9bSzN9qAWA'),
 (29, 'benclauser', '$2y$10$vqomU7Txzwzk.eGP6hCqQu/yy8svlQABkTPmWBnJWVrV6YeFq6Dyi', 'Ben Clauser', 'Ringia', 'benringia@gmail.com', NULL, 'subscriber', '$2y$10$VY3LJhnKS9iF9bSzN9qAWA'),
-(30, 'newguy1', '$2y$10$9j387srG8wiUs0t.cNWzvOuu978WqRG.QIuRsp7QVmx.O3VWmx3Gm', 'Admin2', 'New', 'newguys@gmail.com', NULL, 'admin', '$2y$10$VY3LJhnKS9iF9bSzN9qAWA');
+(30, 'newguy1', '$2y$10$9j387srG8wiUs0t.cNWzvOuu978WqRG.QIuRsp7QVmx.O3VWmx3Gm', 'Admin2', 'New', 'newguys@gmail.com', NULL, 'admin', '$2y$10$VY3LJhnKS9iF9bSzN9qAWA'),
+(47, 'benny', '$2y$12$xXulUdl/BJr/fIA75d1Da./L7tzHFTiuI/3q66dc3uV4..1FVxDVi', '', '', 'benny@gmail.com', NULL, 'subscriber', '$2y$10$VY3LJhnKS9iF9bSzN9qAWA');
 
 -- --------------------------------------------------------
 
@@ -151,7 +153,7 @@ CREATE TABLE `users_online` (
 --
 
 INSERT INTO `users_online` (`id`, `session`, `time`) VALUES
-(1, 'p80s2mjkjtavjon2dmkjmmuo2o', 1621220785),
+(1, 'p80s2mjkjtavjon2dmkjmmuo2o', 1621312665),
 (2, 'jbke9qj15vf484dqidrq601hfn', 1620642417),
 (3, 'qcu4a0nrpbe6tb3jb1ngbktoip', 1621220654);
 
@@ -197,7 +199,7 @@ ALTER TABLE `users_online`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `cat_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -215,7 +217,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `users_online`
